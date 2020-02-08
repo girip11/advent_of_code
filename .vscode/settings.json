@@ -1,0 +1,26 @@
+{
+  "editor.renderWhitespace": "all",
+  "python.pythonPath": "/home/girish/.local/share/virtualenvs/advent_of_code-5TsOSkHD/bin/python",
+  "python.venvPath": "/home/girish/.local/share/virtualenvs",
+  "python.pipenvPath": "/home/girish/.pyenv/shims/pipenv",
+  "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.autoComplete.showAdvancedMembers": true,
+
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    "editor.wrappingIndent": "none",
+    "editor.renderWhitespace": "all",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": true
+    }
+  },
+
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.fontSize": 16
+}
