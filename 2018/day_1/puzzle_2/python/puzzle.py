@@ -7,47 +7,48 @@ def find_first_repeating_frequency(frequencies):
         This methods returns the first repeating among the aggregated frequencies.
     """
     current_frequency = 0
-    known_frequencies = {current_frequency}
+    computed_frequencies = {current_frequency}
     first_repeating_frequency = None
+    input_freq_count = len(frequencies)
+
+    if input_freq_count == 0:
+        return first_repeating_frequency
 
     counter = 0
-    iterations = 0
 
     while first_repeating_frequency == None:
-        if counter == len(frequencies):
-            counter = 0
+        current_frequency += frequencies[counter % input_freq_count]
 
-        current_frequency += frequencies[counter]
-
-        if current_frequency in known_frequencies:
+        # In python, set contains and add operations take up O(1)
+        if current_frequency in computed_frequencies:
             first_repeating_frequency = current_frequency
             break
         else:
-            known_frequencies.add(current_frequency)
+            computed_frequencies.add(current_frequency)
+            # increment when adding a new frequency
             counter += 1
 
-        iterations += 1
-
-    print(f"Iterating spent: {iterations}")
-    print(f"Total unique frequencies: {len(known_frequencies)}")
+    print(f"Iterations spent: {counter}")
+    print(f"Total unique frequencies: {len(computed_frequencies)}")
     return first_repeating_frequency
+
+
+def _parse_int(s):
+    """
+        Just removes leading and trailing spaces if any and converts the string to int.
+    """
+    return int(s) if (s := s.strip()) else None
 
 
 def main(args):
     """
         This is the entry point.
     """
-    if len(args) != 2 or len(args[1].strip()) == 0:
-        print("Please provide the input file for the puzzle.")
-        print("Usage: puzzle_1.py <input_file>")
-        return
-
     input_frequencies = []
 
-    with open(args[1], "r") as frequencies_file:
-        for freq in frequencies_file:
-            if freq:
-                input_frequencies.append(int(freq))
+    for line in sys.stdin:
+        if freq := _parse_int(line):
+            input_frequencies.append(freq)
 
     print(
         f"First repeating frequency: {find_first_repeating_frequency(input_frequencies)}"
