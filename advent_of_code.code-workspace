@@ -28,6 +28,10 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
-    "python.autoComplete.showAdvancedMembers": true
+    "python.autoComplete.showAdvancedMembers": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestPath": "pytest"
   }
 }
