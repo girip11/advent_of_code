@@ -1,13 +1,5 @@
 {
   "editor.renderWhitespace": "all",
-  "python.pythonPath": "/home/girish/.local/share/virtualenvs/advent_of_code-5TsOSkHD/bin/python",
-  "python.venvPath": "/home/girish/.local/share/virtualenvs",
-  "python.pipenvPath": "/home/girish/.pyenv/shims/pipenv",
-  "python.formatting.provider": "black",
-  "python.linting.pylintEnabled": true,
-  "python.linting.enabled": true,
-  "python.linting.lintOnSave": true,
-  "python.autoComplete.showAdvancedMembers": true,
 
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",

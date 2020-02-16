@@ -23,12 +23,7 @@ def main(args):
     """
         This is the entry point.
     """
-    input_frequencies = []
-
-    for line in sys.stdin:
-        if freq := _parse_int(line):
-            input_frequencies.append(freq)
-
+    input_frequencies = map(_parse_int, sys.stdin)
     print(f"Final frequency: {find_aggregate_frequency(input_frequencies)}")
 
 

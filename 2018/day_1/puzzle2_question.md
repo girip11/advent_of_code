@@ -1,4 +1,4 @@
-# Question
+# Puzzle part2 Question
 
 To calibrate the device, you need to find the first frequency it reaches twice.
 

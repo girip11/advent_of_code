@@ -1,4 +1,4 @@
-# Question
+# Puzzle part1 Question
 
 For example, if the device displays frequency changes of +1, -2, +3, +1, then starting from a frequency of zero, the following changes would occur:
 
