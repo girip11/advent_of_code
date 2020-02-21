@@ -1,9 +1,10 @@
 import sys
 
 from itertools import cycle
+from typing import List, Iterable, MutableSet, Optional
 
 
-def find_first_repeating_frequency(frequencies):
+def find_first_repeating_frequency(frequencies: List[int]) -> Optional[int]:
     """
         Input: Accepts an array containing a positive or negative frequency value.
         This methods returns the first repeating among the aggregated frequencies.
@@ -13,16 +14,16 @@ def find_first_repeating_frequency(frequencies):
     if len(frequencies) == 0:
         return first_repeating_frequency
 
-    current_frequency = 0
-    computed_frequencies = {current_frequency}
+    current_frequency: int = 0
+    computed_frequencies: MutableSet[int] = {current_frequency}
 
-    for c, freq in enumerate(cycle(frequencies)):
+    for count, freq in enumerate(cycle(frequencies)):
         current_frequency += freq
 
         # In python, set contains and add operations take up O(1)
         if current_frequency in computed_frequencies:
             first_repeating_frequency = current_frequency
-            print(f"Iterations spent: {c}")
+            print(f"Iterations spent: {count}")
             break
         else:
             computed_frequencies.add(current_frequency)
@@ -31,18 +32,11 @@ def find_first_repeating_frequency(frequencies):
     return first_repeating_frequency
 
 
-def _parse_int(s):
-    """
-        Just removes leading and trailing spaces if any and converts the string to int.
-    """
-    return int(s) if (s := s.strip()) else None
-
-
-def main(args):
+def main(*args: str) -> None:
     """
         This is the entry point.
     """
-    input_frequencies = list(map(_parse_int, sys.stdin))
+    input_frequencies: List[int] = list(map(int, sys.stdin))
 
     print(
         f"First repeating frequency: {find_first_repeating_frequency(input_frequencies)}"
@@ -50,4 +44,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main(*sys.argv)

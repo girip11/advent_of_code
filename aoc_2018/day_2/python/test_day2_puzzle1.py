@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from day2_puzzle1 import calculate_checksum
+from aoc_2018.day_2.python.day2_puzzle1 import calculate_checksum
 
 
 def _get_input(input_file):

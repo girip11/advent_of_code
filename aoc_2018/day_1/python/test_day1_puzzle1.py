@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from day1_puzzle1 import find_aggregate_frequency
+from aoc_2018.day_1.python.day1_puzzle1 import find_aggregate_frequency
 
 
 def _get_input(input_file):

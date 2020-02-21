@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from day2_puzzle2 import find_common_letters
+from aoc_2018.day_2.python.day2_puzzle2 import find_common_letters
 
 
 def _get_input(input_file):
