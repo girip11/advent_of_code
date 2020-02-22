@@ -1,8 +1,9 @@
 import sys
 from functools import reduce
+from typing import List, Iterable
 
 
-def find_aggregate_frequency(frequencies):
+def find_aggregate_frequency(frequencies: Iterable[int]) -> int:
     """
         Input: Accepts a list containing a positive or negative frequency values.
         This methods returns the final sum of all the frequencies.
@@ -12,18 +13,11 @@ def find_aggregate_frequency(frequencies):
     return reduce(lambda a, b: a + b, frequencies)
 
 
-def _parse_int(s):
-    """
-        Just removes leading and trailing spaces if any and converts the string to int.
-    """
-    return int(s) if (s := s.strip()) else None
-
-
-def main(args):
+def main(args: List[str]) -> None:
     """
         This is the entry point.
     """
-    input_frequencies = map(_parse_int, sys.stdin)
+    input_frequencies: Iterable[int] = map(int, sys.stdin)
     print(f"Final frequency: {find_aggregate_frequency(input_frequencies)}")
 
 

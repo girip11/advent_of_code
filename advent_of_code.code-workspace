@@ -32,6 +32,10 @@
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.testing.pytestPath": "pytest"
+    "python.testing.pytestPath": "pytest",
+
+    "mypy.executable": "/home/girish/.local/share/virtualenvs/advent_of_code-5TsOSkHD/bin/mypyls",
+    "mypy.targets": ["aoc_2018"],
+    "mypy.configFile": "mypy.ini"
   }
 }
