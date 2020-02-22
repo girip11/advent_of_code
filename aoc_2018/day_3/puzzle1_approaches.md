@@ -20,9 +20,8 @@
 
 This approach is a slight modification to the approach 2 (implementation wise) which could improve on memory usage, since the count of the points is what is required.
 
-* Parse each claim to get the rectangle coordinates.
-* Get the minimum and maximum row and column from all of the claims/rectangle.
-* Using these values initialize an array or size [(max_row - min_row) + 1, (max_col - min_col) + 1].
+* Parse each claim to get the maximum dimension of the fabric (though fabric is a square we may not need to allocate memory for the entire fabric).
+* Using these values initialize an array or size [max_length, max_width].
 * For each rectangle, map its coordinates to the array position and add a count to value in the index pointed to by the coordinates.
 * Iterate through the array to find out all the values >= 2
 * Compute complexity - O(n) - where n is the number of claims.
