@@ -35,7 +35,7 @@
     "python.testing.pytestPath": "pytest",
 
     "mypy.executable": "/home/girish/.local/share/virtualenvs/advent_of_code-5TsOSkHD/bin/mypyls",
-    "mypy.targets": ["aoc_2018"],
+    "mypy.targets": ["aoc_2018", "aoc_2015"],
     "mypy.configFile": "mypy.ini"
   }
 }
