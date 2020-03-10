@@ -1,7 +1,3 @@
-import os
-from pathlib import Path
-from typing import List
-
 from aoc_2015.day_1.python.day1_puzzle import (
     get_dest_floor,
     get_first_basement_ins_pos,

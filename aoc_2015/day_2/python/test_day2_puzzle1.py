@@ -1,5 +1,3 @@
-import os
-from pathlib import Path
 from typing import List
 
 from .day2_puzzle1 import PresentBox, find_wrapping_paper_length, find_ribbon_length

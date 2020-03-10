@@ -1,6 +1,6 @@
 import sys
 from functools import reduce
-from typing import Callable, List, Literal
+from typing import Callable, List
 
 
 def get_dest_floor(floor_instructions: str) -> int:
