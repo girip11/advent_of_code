@@ -21,7 +21,7 @@
     "shellcheck.run": "onSave",
     "shellformat.flag": "-i 2 -ci -sr -bn",
 
-    "python.pythonPath": "/home/girish/.local/share/virtualenvs/advent_of_code-5TsOSkHD/bin/python",
+    "python.pythonPath": "/home/girish/.local/share/virtualenvs/advent_of_code-BswtnA1z/bin/python",
     "python.venvPath": "/home/girish/.local/share/virtualenvs",
     "python.pipenvPath": "/home/girish/.pyenv/shims/pipenv",
     "python.formatting.provider": "black",
@@ -34,7 +34,7 @@
     "python.testing.pytestEnabled": true,
     "python.testing.pytestPath": "pytest",
 
-    "mypy.executable": "/home/girish/.local/share/virtualenvs/advent_of_code-5TsOSkHD/bin/mypyls",
+    "mypy.executable": "/home/girish/.local/share/virtualenvs/advent_of_code-BswtnA1z/bin/mypyls",
     "mypy.targets": ["aoc_2018", "aoc_2015"],
     "mypy.configFile": "mypy.ini"
   }
