@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import sys
 from functools import reduce
-from typing import List, Iterable, Tuple
+from typing import Callable, List, Iterable, Tuple
 
 
 @dataclass(init=False)
@@ -9,7 +9,9 @@ class PresentBox:
     l: int
     w: int
     h: int
-    smallest_side: Tuple[int, int]
+    # When we have a n tuple this is the way to use typehints
+    # Reference: https://github.com/python/typing/issues/30
+    smallest_side: Tuple[int, ...]
 
     def __init__(self, l: int, w: int, h: int) -> None:
         self.l = l
@@ -31,17 +33,17 @@ class PresentBox:
 
 
 def find_wrapping_paper_length(present_boxes: Iterable[PresentBox]) -> int:
-    return reduce(
-        lambda acc, pb: acc + pb.area() + pb.smallest_side_area(), present_boxes, 0
-    )
+    func: Callable[
+        [int, PresentBox], int
+    ] = lambda acc, pb: acc + pb.area() + pb.smallest_side_area()
+    return reduce(func, present_boxes, 0)
 
 
 def find_ribbon_length(present_boxes: Iterable[PresentBox]) -> int:
-    return reduce(
-        lambda acc, pb: acc + pb.smallest_side_perimeter() + pb.volume(),
-        present_boxes,
-        0,
-    )
+    func: Callable[
+        [int, PresentBox], int
+    ] = lambda acc, pb: acc + pb.smallest_side_perimeter() + pb.volume()
+    return reduce(func, present_boxes, 0)
 
 
 def main(args: List[str]) -> None:
