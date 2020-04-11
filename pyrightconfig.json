@@ -1,0 +1,16 @@
+{
+  "include": ["aoc_2015"],
+
+  "exclude": ["**/node_modules", "**/__pycache__"],
+
+  "ignore": ["aoc_2018"],
+
+  "venvPath": "/home/girish/.local/share/virtualenvs",
+
+  "reportTypeshedErrors": false,
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+
+  "pythonVersion": "3.8",
+  "pythonPlatform": "Linux"
+}
