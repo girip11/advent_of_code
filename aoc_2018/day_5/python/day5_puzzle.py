@@ -13,7 +13,7 @@ def _trigger_polymer_reaction(
         if ignore_types is not None and polyunit in ignore_types:
             continue
 
-        prev_polyunit = (tos >= 0 and polymer_stack[tos]) or None
+        prev_polyunit = polymer_stack[tos] if tos >= 0 else None
 
         if prev_polyunit and abs(ord(prev_polyunit) - ord(polyunit)) == 32:
             polymer_stack.pop()

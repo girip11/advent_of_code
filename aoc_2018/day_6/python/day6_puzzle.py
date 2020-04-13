@@ -90,8 +90,8 @@ class ProximityGrid:
 
         if len(distances) > 1 and distances[0][1] == distances[1][1]:
             return None
-        else:
-            return distances[0][0]
+
+        return distances[0][0]
 
     def _is_corner_coordinate(self, coordinate: Coordinate) -> bool:
         return (coordinate.x == 0 or coordinate.x == self._grid_size - 1) or (
@@ -121,14 +121,14 @@ def main(*_: str) -> None:
 
     grid_size = max(*[x for x, _ in coordinates_list], *[y for _, y in coordinates_list])
 
-    pg = ProximityGrid(grid_size + 1, coordinates_list)
+    proximity_grid = ProximityGrid(grid_size + 1, coordinates_list)
     # pg = ProximityGrid(10, coordinates_list)
     # pg.print_proximity_grid()
 
     # part1
-    print(pg.largest_finite_area())
+    print(proximity_grid.largest_finite_area())
     # part2
-    print(pg.proximity_region_size(10000))
+    print(proximity_grid.proximity_region_size(10000))
 
 
 if __name__ == "__main__":

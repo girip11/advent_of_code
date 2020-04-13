@@ -17,7 +17,7 @@ def main(*_: str) -> None:
 
 def find_non_overlapping_claim(claims: List[Claim]) -> Optional[str]:
     """Returns the ID of the claim which does not overlap with other claims
-    
+
     Arguments:
         claims {List[Claim]}
     
