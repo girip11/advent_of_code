@@ -6,9 +6,7 @@ from aoc_2018.day_1.python.day1_puzzle1 import find_aggregate_frequency
 
 
 def get_input(input_file_name: str) -> List[int]:
-    input_file_path: str = os.path.join(
-        Path(os.path.dirname(__file__)).parent, input_file_name
-    )
+    input_file_path: str = os.path.join(Path(os.path.dirname(__file__)).parent, input_file_name)
     frequencies: List[int] = []
 
     with open(input_file_path) as input_file:

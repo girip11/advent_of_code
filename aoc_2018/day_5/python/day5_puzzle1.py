@@ -1,7 +1,5 @@
-import datetime
 import sys
-from typing import Dict, Iterable, List, Mapping, Optional, Set, Tuple
-from functools import reduce
+from typing import Iterable, List, Optional, Set, Tuple
 
 
 def _trigger_polymer_reaction(
@@ -61,14 +59,10 @@ def find_best_polymer_reaction(polymer_seq: str) -> int:
     return best_seq_len
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     polymer_seq: str = sys.stdin.read().strip()
-    print(
-        f"Polymer Seq length post reaction: {polymer_units_after_reaction(polymer_seq)}"
-    )
-    print(
-        f"Length of best possible reaction sequence: {find_best_polymer_reaction(polymer_seq)}"
-    )
+    print(f"Polymer Seq length post reaction: {polymer_units_after_reaction(polymer_seq)}")
+    print(f"Length of best possible reaction sequence: {find_best_polymer_reaction(polymer_seq)}")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,6 @@
-import sys
 import os
 from pathlib import Path
-from typing import Iterable, List, Mapping
+from typing import List, Mapping
 from .day4_puzzle import (
     GuardActivity,
     GuardActivityLog,
@@ -14,9 +13,7 @@ from .day4_puzzle import (
 
 
 def get_input(input_file_name: str) -> Mapping[int, GuardActivity]:
-    input_file_path: str = os.path.join(
-        Path(os.path.dirname(__file__)).parent, input_file_name
-    )
+    input_file_path: str = os.path.join(Path(os.path.dirname(__file__)).parent, input_file_name)
 
     guard_activities: Mapping[int, GuardActivity] = {}
 

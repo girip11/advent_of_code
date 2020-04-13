@@ -32,15 +32,13 @@ def find_first_repeating_frequency(frequencies: List[int]) -> Optional[int]:
     return first_repeating_frequency
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     """
         This is the entry point.
     """
     input_frequencies: List[int] = list(map(int, sys.stdin))
 
-    print(
-        f"First repeating frequency: {find_first_repeating_frequency(input_frequencies)}"
-    )
+    print(f"First repeating frequency: {find_first_repeating_frequency(input_frequencies)}")
 
 
 if __name__ == "__main__":

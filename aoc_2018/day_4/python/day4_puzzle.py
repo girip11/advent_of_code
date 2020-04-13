@@ -5,8 +5,7 @@ import itertools
 import re
 import sys
 
-from re import Pattern
-from typing import Dict, List, Mapping, Optional, Tuple
+from typing import Dict, List, Mapping, Optional, Pattern, Tuple
 from functools import reduce
 
 
@@ -15,7 +14,7 @@ class GuardActivity:
         self._duty_days: Dict[str, List[Tuple[int, int]]] = {}
 
     def add_duty_day(self, day: str) -> None:
-        if not day in self._duty_days:
+        if day not in self._duty_days:
             self._duty_days[day] = []
 
     def add_sleep_interval(self, day: str, time_interval: Tuple[int, int]) -> None:
@@ -26,7 +25,7 @@ class GuardActivity:
             day {str} -- Duty day
             time_interval {Tuple[int, int]} -- sleep interval
         """
-        if not day in self._duty_days:
+        if day not in self._duty_days:
             self.add_duty_day(day)
 
         self._duty_days[day].append(time_interval)
@@ -58,7 +57,7 @@ class GuardActivityLog:
     def is_asleep_log(self) -> bool:
         return "asleep" in self.msg
 
-    def is_wakup_log(self) -> bool:
+    def is_wakeup_log(self) -> bool:
         return "wakes" in self.msg
 
     def get_guard_id(self) -> Optional[int]:
@@ -84,9 +83,7 @@ def get_guard_activity_logs(raw_logs: List[str]) -> List[GuardActivityLog]:
     for activity in raw_logs:
         match = log_pattern.match(activity)
         if match and len(match.groups()) == 2:
-            activity_time: datetime = datetime.strptime(
-                match.groups()[0], "%Y-%m-%d %H:%M"
-            )
+            activity_time: datetime = datetime.strptime(match.groups()[0], "%Y-%m-%d %H:%M")
             guard_activities.append(GuardActivityLog(activity_time, match.groups()[1]))
 
     return guard_activities
@@ -112,13 +109,13 @@ def get_guard_activities(
 
             current_guard = log.get_guard_id()
             if current_guard:
-                if not current_guard in guards:
+                if current_guard not in guards:
                     guard_activity: GuardActivity = GuardActivity()
                     guards[current_guard] = guard_activity
                 guards[current_guard].add_duty_day(log.get_duty_date())
         elif log.is_asleep_log():
             sleep_time = log.time
-        elif log.is_wakup_log():
+        elif log.is_wakeup_log():
             if current_guard and sleep_time:
                 guards[current_guard].add_sleep_interval(
                     log.get_duty_date(), (sleep_time.minute, log.time.minute)
@@ -196,17 +193,15 @@ def find_freq_sleepiest_minute(
     if sleepiest_guard is None:
         return None
 
-    return (sleepiest_guard, sleepiest_minute)
+    return sleepiest_guard, sleepiest_minute
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     guard_activity_logs: List[GuardActivityLog] = get_guard_activity_logs(
         sorted(activity for activity in sys.stdin)
     )
 
-    guard_activities: Mapping[int, GuardActivity] = get_guard_activities(
-        guard_activity_logs
-    )
+    guard_activities: Mapping[int, GuardActivity] = get_guard_activities(guard_activity_logs)
 
     sleepiest_guard: int = find_sleepiest_guard(guard_activities)
     sleepiest_minute, sleepiest_minute_freq = find_sleepiest_minute(
@@ -214,13 +209,12 @@ def main(*args: str) -> None:
     )
 
     print(
-        f"Sleepiest guard by strategy 1 is {sleepiest_guard}. This guard slept the most on {sleepiest_minute} minute {sleepiest_minute_freq} times"
+        f"Sleepiest guard by strategy 1 is {sleepiest_guard}. \
+        This guard slept the most on {sleepiest_minute} minute {sleepiest_minute_freq} times"
     )
     print(f"Solution to part1: {sleepiest_guard * sleepiest_minute}")
 
-    sleepiest_guard, sleepiest_minute = find_freq_sleepiest_minute(
-        guard_activities
-    ) or (-1, -1)
+    sleepiest_guard, sleepiest_minute = find_freq_sleepiest_minute(guard_activities) or (-1, -1)
     print(
         f"Sleepiest guard by strategy 2 is {sleepiest_guard}. This guard slept the most on {sleepiest_minute} minute"
     )

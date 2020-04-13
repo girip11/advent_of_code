@@ -19,18 +19,14 @@ def find_square_inches_with_overlapping_claims(claims: List[Claim]) -> int:
                     all_points[claim_pos] = [claim.claim_id]
 
     return reduce(
-        lambda total, item: (total + 1) if len(item[1]) >= 2 else total,
-        all_points.items(),
-        0,
+        lambda total, item: (total + 1) if len(item[1]) >= 2 else total, all_points.items(), 0,
     )
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     claims: List[Claim] = list(map(parse_claim, sys.stdin))
 
-    print(
-        f"Square inches with claims >= 2: {find_square_inches_with_overlapping_claims(claims)} "
-    )
+    print(f"Square inches with claims >= 2: {find_square_inches_with_overlapping_claims(claims)} ")
 
 
 if __name__ == "__main__":

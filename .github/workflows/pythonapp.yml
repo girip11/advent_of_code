@@ -33,12 +33,15 @@ jobs:
     - name: Install dependencies
       run: |
         pipenv install --dev
-    
+
+    - name: Checking formatting with Black
+      run: |
+        pipenv run black -t py38 -l 100 --check aoc_*
+
     - name:  Type checking with Mypy
-      uses: jpetrucciani/mypy-check@master
-      with:
-        path: 'aoc_2015 aoc_2018'
+      run: |
+        pipenv run mypy aoc_*
 
     - name: Test with pytest
       run: |
-        pipenv run pytest aoc_2015 aoc_2018 
+        pipenv run pytest aoc_*

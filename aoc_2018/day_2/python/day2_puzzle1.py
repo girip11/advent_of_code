@@ -11,7 +11,7 @@ def calculate_checksum(box_ids: Iterable[str]) -> int:
         box_ids {Array[String]} -- id containing all lowercase alphabets only
     """
     char_counts: Iterable[Tuple[int, int]] = (
-        _get_repeating_chars_count(id) for id in box_ids
+        _get_repeating_chars_count(box_id) for box_id in box_ids
     )
 
     final_count: Tuple[int, int] = reduce(
@@ -40,14 +40,14 @@ def _get_repeating_chars_count(box_id: str) -> Tuple[int, int]:
         counting_bucket[(ord(c) - char_code_start)] += 1
 
     unique_char_counts: Set[int] = set(counting_bucket)
-    return (int(2 in unique_char_counts), int(3 in unique_char_counts))
+    return int(2 in unique_char_counts), int(3 in unique_char_counts)
 
 
-def main(*args: str):
+def main(*_: str):
     """
         This is the entry point.
     """
-    box_ids: Iterable[str] = (id.strip() for id in sys.stdin)
+    box_ids: Iterable[str] = (box_id.strip() for box_id in sys.stdin)
     print(f"Checksum: {calculate_checksum(box_ids)}")
 
 
