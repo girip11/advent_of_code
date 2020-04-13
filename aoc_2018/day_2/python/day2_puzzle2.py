@@ -5,11 +5,9 @@ from typing import List, Optional, Iterable
 
 def find_common_letters(box_ids: List[str]) -> Optional[str]:
     """Returns the common letters from the correct box ids.
-    Two boxes form the correct combination, if the ids differ by exactly a single character. 
-    
+    Two boxes form the correct combination, if the ids differ by exactly a single character.
     Arguments:
         box_ids {list} -- Sequence of box ids
-    
     Returns:
         [String]
     """
@@ -21,19 +19,17 @@ def find_common_letters(box_ids: List[str]) -> Optional[str]:
         if (len(id1) - len(common_letters)) == 1:
             print(f"Id1: {id1}, Id2: {id2}")
             break
-        else:
-            common_letters = None
+
+        common_letters = None
 
     return common_letters
 
 
 def _get_common_letters(box_id1: str, box_id2: str) -> str:
     """Returns common letters in the box ids
-  
     Arguments:
         box_id1 {String}
         box_id2 {String}
-
     Returns:
         [String]
     """
@@ -45,11 +41,11 @@ def _get_common_letters(box_id1: str, box_id2: str) -> str:
     return "".join(common_letters)
 
 
-def main(*args: str):
+def main(*_: str):
     """
         This is the entry point.
     """
-    box_ids: List[str] = [id.strip() for id in sys.stdin]
+    box_ids: List[str] = [box_id.strip() for box_id in sys.stdin]
     print(f"Checksum: {find_common_letters(box_ids)}")
 
 

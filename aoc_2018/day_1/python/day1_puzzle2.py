@@ -1,7 +1,7 @@
 import sys
 
 from itertools import cycle
-from typing import List, Iterable, MutableSet, Optional
+from typing import List, MutableSet, Optional
 
 
 def find_first_repeating_frequency(frequencies: List[int]) -> Optional[int]:
@@ -25,22 +25,20 @@ def find_first_repeating_frequency(frequencies: List[int]) -> Optional[int]:
             first_repeating_frequency = current_frequency
             print(f"Iterations spent: {count}")
             break
-        else:
-            computed_frequencies.add(current_frequency)
+
+        computed_frequencies.add(current_frequency)
 
     print(f"Total unique frequencies: {len(computed_frequencies)}")
     return first_repeating_frequency
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     """
         This is the entry point.
     """
     input_frequencies: List[int] = list(map(int, sys.stdin))
 
-    print(
-        f"First repeating frequency: {find_first_repeating_frequency(input_frequencies)}"
-    )
+    print(f"First repeating frequency: {find_first_repeating_frequency(input_frequencies)}")
 
 
 if __name__ == "__main__":

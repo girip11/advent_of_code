@@ -1,7 +1,3 @@
-import os
-from pathlib import Path
-from typing import List
-
 from aoc_2018.day_1.python.day1_puzzle2 import find_first_repeating_frequency
 from aoc_2018.day_1.python.test_day1_puzzle1 import get_input
 

@@ -1,5 +1,3 @@
-import os
-from pathlib import Path
 from typing import List
 
 from aoc_2018.day_2.python.day2_puzzle2 import find_common_letters
@@ -11,12 +9,9 @@ def test_find_common_letters_simple() -> None:
 
 
 def test_find_common_letters_corner_case() -> None:
-    input: List[str] = ["abcdef", "abckeh", "abcyef"]
-    assert find_common_letters(input) == "abcef"
+    input_words: List[str] = ["abcdef", "abckeh", "abcyef"]
+    assert find_common_letters(input_words) == "abcef"
 
 
 def test_find_common_letters_large():
-    assert (
-        find_common_letters(get_input("puzzle_input.txt"))
-        == "pebjqsalrdnckzfihvtxysomg"
-    )
+    assert find_common_letters(get_input("puzzle_input.txt")) == "pebjqsalrdnckzfihvtxysomg"

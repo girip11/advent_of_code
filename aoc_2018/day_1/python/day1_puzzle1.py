@@ -13,7 +13,7 @@ def find_aggregate_frequency(frequencies: Iterable[int]) -> int:
     return reduce(lambda a, b: a + b, frequencies)
 
 
-def main(args: List[str]) -> None:
+def main(_: List[str]) -> None:
     """
         This is the entry point.
     """

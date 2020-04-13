@@ -1,9 +1,9 @@
 {
-  "include": ["aoc_2015"],
+  "include": ["aoc_2015", "aoc_2018"],
 
   "exclude": ["**/node_modules", "**/__pycache__"],
 
-  "ignore": ["aoc_2018"],
+  "ignore": [],
 
   "venvPath": "/home/girish/.local/share/virtualenvs",
 

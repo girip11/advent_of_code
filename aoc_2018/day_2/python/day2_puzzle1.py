@@ -4,14 +4,13 @@ from typing import Iterable, Set, List, Tuple
 
 
 def calculate_checksum(box_ids: Iterable[str]) -> int:
-    """Computes and returns the checksum which is a product of the number of box 
+    """Computes and returns the checksum which is a product of the number of box
     ids containing characters repeated exactly twice and thrice.
-    
     Arguments:
         box_ids {Array[String]} -- id containing all lowercase alphabets only
     """
     char_counts: Iterable[Tuple[int, int]] = (
-        _get_repeating_chars_count(id) for id in box_ids
+        _get_repeating_chars_count(box_id) for box_id in box_ids
     )
 
     final_count: Tuple[int, int] = reduce(
@@ -26,28 +25,26 @@ def _get_repeating_chars_count(box_id: str) -> Tuple[int, int]:
     """Returns a tuple (twice_repeated, thrice_repeated)
     twice_repeated, thrice_repeated - 1 - atleast 1 character is repeated twice exactly
                    - 0 No character is repeated exactly twice in the id
-
     Arguments:
-        box_id {String} -- Box id containing lowercase alphabets only 
-
+        box_id {String} -- Box id containing lowercase alphabets only
     Returns:
         [Tuple(int, int)]
     """
     counting_bucket: List[int] = [0] * 26
     char_code_start: int = ord("a")
 
-    for c in box_id:
-        counting_bucket[(ord(c) - char_code_start)] += 1
+    for letter in box_id:
+        counting_bucket[(ord(letter) - char_code_start)] += 1
 
     unique_char_counts: Set[int] = set(counting_bucket)
-    return (int(2 in unique_char_counts), int(3 in unique_char_counts))
+    return int(2 in unique_char_counts), int(3 in unique_char_counts)
 
 
-def main(*args: str):
+def main(*_: str):
     """
         This is the entry point.
     """
-    box_ids: Iterable[str] = (id.strip() for id in sys.stdin)
+    box_ids: Iterable[str] = (box_id.strip() for box_id in sys.stdin)
     print(f"Checksum: {calculate_checksum(box_ids)}")
 
 

@@ -45,9 +45,7 @@ def houses_gifted_by_santa(navigation: Iterable[str]) -> int:
 
     # Moves through the map
     reduce(
-        lambda cur_loc, direction: present_to_house(
-            direction, cur_loc, visited_house_coordinates
-        ),
+        lambda cur_loc, direction: present_to_house(direction, cur_loc, visited_house_coordinates),
         navigation,
         (0, 0),
     )
@@ -70,9 +68,7 @@ def houses_gifted_by_santa_and_robot(navigation: Iterable[str]) -> int:
     # Moves through the map
     for direction in navigation:
         if is_santas_turn(turns):
-            santa_cur_loc = present_to_house(
-                direction, santa_cur_loc, visited_house_coordinates
-            )
+            santa_cur_loc = present_to_house(direction, santa_cur_loc, visited_house_coordinates)
         else:
             robot_santa_cur_loc = present_to_house(
                 direction, robot_santa_cur_loc, visited_house_coordinates
@@ -82,7 +78,7 @@ def houses_gifted_by_santa_and_robot(navigation: Iterable[str]) -> int:
     return len(visited_house_coordinates.keys())
 
 
-def main(args: List[str]) -> None:
+def main(_: List[str]) -> None:
     """
         This is the entry point.
     """

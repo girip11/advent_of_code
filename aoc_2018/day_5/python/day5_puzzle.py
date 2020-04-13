@@ -1,7 +1,5 @@
-import datetime
 import sys
-from typing import Dict, Iterable, List, Mapping, Optional, Set, Tuple
-from functools import reduce
+from typing import Iterable, List, Optional, Set, Tuple
 
 
 def _trigger_polymer_reaction(
@@ -15,7 +13,7 @@ def _trigger_polymer_reaction(
         if ignore_types is not None and polyunit in ignore_types:
             continue
 
-        prev_polyunit = (tos >= 0 and polymer_stack[tos]) or None
+        prev_polyunit = polymer_stack[tos] if tos >= 0 else None
 
         if prev_polyunit and abs(ord(prev_polyunit) - ord(polyunit)) == 32:
             polymer_stack.pop()
@@ -54,21 +52,18 @@ def find_best_polymer_reaction(polymer_seq: str) -> int:
         current_seq_len = len(polymer_seq_post_reaction)
         if current_seq_len < best_seq_len:
             print(
-                f"Best seq len changed from {best_seq_len} to {current_seq_len} by removing {skip} type units"
+                f"Best seq len changed from {best_seq_len} to \
+{current_seq_len} by removing {skip} type units"
             )
             best_seq_len = current_seq_len
 
     return best_seq_len
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     polymer_seq: str = sys.stdin.read().strip()
-    print(
-        f"Polymer Seq length post reaction: {polymer_units_after_reaction(polymer_seq)}"
-    )
-    print(
-        f"Length of best possible reaction sequence: {find_best_polymer_reaction(polymer_seq)}"
-    )
+    print(f"Polymer Seq length post reaction: {polymer_units_after_reaction(polymer_seq)}")
+    print(f"Length of best possible reaction sequence: {find_best_polymer_reaction(polymer_seq)}")
 
 
 if __name__ == "__main__":

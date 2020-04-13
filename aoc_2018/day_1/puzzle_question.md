@@ -1,4 +1,23 @@
-# Puzzle part2 Question
+# Puzzle part1 Question
+
+For example, if the device displays frequency changes of +1, -2, +3, +1, then starting from a frequency of zero, the following changes would occur:
+
+* Current frequency  0, change of +1; resulting frequency  1.
+* Current frequency  1, change of -2; resulting frequency -1.
+* Current frequency -1, change of +3; resulting frequency  2.
+* Current frequency  2, change of +1; resulting frequency  3.
+
+In this example, the resulting frequency is 3.
+
+Here are other example situations:
+
+* +1, +1, +1 results in  3
+* +1, +1, -2 results in  0
+* -1, -2, -3 results in -6
+
+Starting with a frequency of zero, **what is the resulting frequency** after all of the changes in frequency have been applied?
+
+## Puzzle part2 Question
 
 To calibrate the device, you need to find the first frequency it reaches twice.
 
@@ -27,4 +46,4 @@ Here are other examples:
 
 ## Reference
 
-* [Advent of code 2018 day 1 puzzle 2](https://adventofcode.com/2018/day/1#part2)
+* [Advent of code 2018 day 1](https://adventofcode.com/2018/day/1)
