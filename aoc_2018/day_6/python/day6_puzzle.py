@@ -38,7 +38,7 @@ class ProximityGrid:
         print()
 
     def largest_finite_area(self) -> int:
-        grid: List[GridEntry] = [None] * (self._grid_size ** 2)
+        grid: List[GridEntry] = [None] * (self._grid_size ** 2)  # type: ignore
         infinite_coverage: MutableSet[int] = set()
         area: Dict[int, int] = {sc: 0 for sc in self._special_coordinates}
 
@@ -119,7 +119,9 @@ def main(*_: str) -> None:
         (int(coordinate.split(",")[0]), int(coordinate.split(",")[1])) for coordinate in sys.stdin
     ]
 
-    pg = ProximityGrid(359, coordinates_list)
+    grid_size = max(*[x for x, _ in coordinates_list], *[y for _, y in coordinates_list])
+
+    pg = ProximityGrid(grid_size + 1, coordinates_list)
     # pg = ProximityGrid(10, coordinates_list)
     # pg.print_proximity_grid()
 
