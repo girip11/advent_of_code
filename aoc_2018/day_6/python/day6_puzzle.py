@@ -6,8 +6,8 @@ from typing import List, Dict, MutableSet, NamedTuple, Optional, Tuple
 
 @dataclass(init=False, frozen=True)
 class Coordinate:
-    x: int
-    y: int
+    x: int  # pylint: disable=invalid-name
+    y: int  # pylint: disable=invalid-name
 
     def __init__(self, x: int, y: int) -> None:
         super().__setattr__("x", x)

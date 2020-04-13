@@ -52,7 +52,8 @@ def find_best_polymer_reaction(polymer_seq: str) -> int:
         current_seq_len = len(polymer_seq_post_reaction)
         if current_seq_len < best_seq_len:
             print(
-                f"Best seq len changed from {best_seq_len} to {current_seq_len} by removing {skip} type units"
+                f"Best seq len changed from {best_seq_len} to \
+{current_seq_len} by removing {skip} type units"
             )
             best_seq_len = current_seq_len
 

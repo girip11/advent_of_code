@@ -5,9 +5,9 @@ from functools import reduce
 
 class Claim:
     """Claim containing the following details
-    * ID, 
+    * ID,
     * x and y offsets of the claimed section from the beginning of the fabric and
-    * The width and height of the claimed section on the fabric. 
+    * The width and height of the claimed section on the fabric.
     """
 
     claim_id: str
@@ -41,10 +41,8 @@ def main(*_: str) -> None:
 # TODO: better way of parsing is using regex and pattern matching
 def parse_claim(claim_str: str) -> Claim:
     """Claim string example : "#1305 @ 148,699: 27x18"
-    
     Arguments:
         claim_str {str} -- [description]
-    
     Returns:
         Claim -- [description]
     """
@@ -84,9 +82,9 @@ def mark_fabric_with_claims(
 ) -> None:
     pos: int = 0
     for claim in claims:
-        for i in range(claim.y_offset, claim.y_offset + claim.height):
-            for j in range(claim.x_offset, claim.x_offset + claim.width):
-                pos = (i * fabric_dimensions[1]) + j
+        for row in range(claim.y_offset, claim.y_offset + claim.height):
+            for col in range(claim.x_offset, claim.x_offset + claim.width):
+                pos = (row * fabric_dimensions[1]) + col
                 fabric[pos] += 1
 
 

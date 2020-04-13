@@ -10,9 +10,9 @@ def find_square_inches_with_overlapping_claims(claims: List[Claim]) -> int:
     all_points: MutableMapping[str, List[str]] = {}
 
     for claim in claims:
-        for i in range(claim.y_offset, claim.y_offset + claim.height):
-            for j in range(claim.x_offset, claim.x_offset + claim.width):
-                claim_pos: str = f"{i}_{j}"
+        for row in range(claim.y_offset, claim.y_offset + claim.height):
+            for col in range(claim.x_offset, claim.x_offset + claim.width):
+                claim_pos: str = f"{row}_{col}"
                 if claim_pos in all_points:
                     all_points[claim_pos].append(claim.claim_id)
                 else:

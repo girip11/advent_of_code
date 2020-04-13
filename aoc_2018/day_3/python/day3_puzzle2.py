@@ -17,10 +17,8 @@ def main(*_: str) -> None:
 
 def find_non_overlapping_claim(claims: List[Claim]) -> Optional[str]:
     """Returns the ID of the claim which does not overlap with other claims
-
     Arguments:
         claims {List[Claim]}
-    
     Returns:
         Optional[str] - None if no such claim is found else the claim ID
     """
@@ -36,9 +34,9 @@ def find_non_overlapping_claim(claims: List[Claim]) -> Optional[str]:
 
 
 def _is_overlapping(fabric: List[int], fabric_dimensions: Tuple[int, int], claim: Claim) -> bool:
-    for i in range(claim.y_offset, claim.y_offset + claim.height):
-        for j in range(claim.x_offset, claim.x_offset + claim.width):
-            pos = (i * fabric_dimensions[1]) + j
+    for row in range(claim.y_offset, claim.y_offset + claim.height):
+        for col in range(claim.x_offset, claim.x_offset + claim.width):
+            pos = (row * fabric_dimensions[1]) + col
             if fabric[pos] >= 2:
                 return True
     return False

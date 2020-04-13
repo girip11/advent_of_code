@@ -123,7 +123,6 @@ def get_guard_activities(
                 sleep_time = None
         else:
             print(f"Invalid log: {log}")
-            pass
 
     return guards
 
@@ -131,10 +130,8 @@ def get_guard_activities(
 # part 1
 def find_sleepiest_guard(guard_activities: Mapping[int, GuardActivity]) -> int:
     """Returns the ID of the guard with most sleep time
-    
     Arguments:
         guard_activities {Mapping[int, GuardActivity]}
-    
     Returns:
         int -- guard ID
     """
@@ -147,10 +144,8 @@ def find_sleepiest_guard(guard_activities: Mapping[int, GuardActivity]) -> int:
 # common to part 1 and part 2
 def find_sleepiest_minute(guard_activity: GuardActivity) -> Tuple[int, int]:
     """Finds the most common minute at which the guard is asleep
-    
     Arguments:
         guard_activity {GuardActivity}
-    
     Returns:
         Tuple[int, int] -- (Minute, Frequency of sleep on that minute)
     """
@@ -169,10 +164,8 @@ def find_freq_sleepiest_minute(
 ) -> Optional[Tuple[int, int]]:
     """
     Finds the guard who sleeps most of the time on a particular minute and the minute of sleep
-
     Arguments:
-        guard_activities {Mapping[int, GuardActivity]} 
-
+        guard_activities {Mapping[int, GuardActivity]}
     Returns:
         Tuple[int, int] -- [Guard ID, Most frequent sleepy minute ]
     """
@@ -216,7 +209,8 @@ def main(*_: str) -> None:
 
     sleepiest_guard, sleepiest_minute = find_freq_sleepiest_minute(guard_activities) or (-1, -1)
     print(
-        f"Sleepiest guard by strategy 2 is {sleepiest_guard}. This guard slept the most on {sleepiest_minute} minute"
+        f"Sleepiest guard by strategy 2 is {sleepiest_guard}. \
+        This guard slept the most on {sleepiest_minute} minute"
     )
     print(f"Solution to part2: {sleepiest_guard * sleepiest_minute}")
 
