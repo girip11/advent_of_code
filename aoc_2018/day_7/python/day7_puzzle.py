@@ -7,7 +7,7 @@ from typing import Dict, Iterator, List, Mapping, Tuple
 
 
 def main(*_: str) -> None:
-    raw_instructions = [line for line in sys.stdin]
+    raw_instructions = sys.stdin.readlines()
     path_taken = computer_instructions_traversal_order(iter(raw_instructions))
     print(f"Path Taken:{path_taken}")
 
@@ -40,7 +40,7 @@ def get_dependency_graph(
         heappush(prerequisite_map[dependent_step], prereq_step)
         # simple access creates an entry in the list
         if prereq_step not in prerequisite_map:
-            prerequisite_map[prereq_step]
+            prerequisite_map[prereq_step]  # pylint: disable=pointless-statement
         dependency_graph[prereq_step].append(dependent_step)
 
     return (prerequisite_map, dependency_graph)
@@ -104,7 +104,7 @@ def compute_traversal_duration(raw_instructions: Iterator[str], workers: int) ->
 
 @dataclass
 class Work:
-    MISSING = ""
+    MISSING = ""  # pylint: disable=invalid-name
     step: str = MISSING
     work_left: int = 0
 

@@ -11,7 +11,7 @@ from aoc_2018.day_7.python.day7_puzzle import (
 def get_raw_instructions(file_name: str) -> List[str]:
     file_path = os.path.join(Path(os.path.dirname(__file__)).parent, file_name)
     with open(file_path) as input_file:
-        raw_instructions = [line for line in input_file]
+        raw_instructions = input_file.readlines()
 
     return raw_instructions
 
