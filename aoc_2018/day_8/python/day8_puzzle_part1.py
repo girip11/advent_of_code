@@ -7,13 +7,18 @@ def main(*_: str) -> None:
     license_numbers: List[int] = [
         int(num) for num in re.findall(r"\d+", sys.stdin.readline())
     ]
+    metadata_sum = get_metadata_sum(license_numbers)
+    print(metadata_sum)
+
+
+def get_metadata_sum(license_numbers: List[int]) -> int:
+    metadata_sum = 0
     metadata_indices = get_metadata_indices(license_numbers, start=0)
 
-    metadata_sum = 0
     for entry in metadata_indices:
         metadata_sum += sum(license_numbers[entry[0] : entry[1]])
 
-    print(metadata_sum)
+    return metadata_sum
 
 
 def get_metadata_indices(
