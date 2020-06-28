@@ -12,15 +12,40 @@ Solutions to puzzles published at [adventofcode.com](https://adventofcode.com/)
 
 * Clone this repo and execute `pipenv --python 3.8.0 install --dev`. This sets up the virtual environment and installs dev dependencies like formatter (black), linter and ipython
 
-* After installing all the dev dependencies, for the **mypy** vscode extension to work, install the **mypyls** (MyPy Language server) in to the pipenv provided virtual environment.
+* VSCode workspace configuration
+
+```JSON
+{
+    "python.pythonPath": "/home/girish/.local/share/virtualenvs/advent_of_code-BswtnA1z/bin/python",
+    "python.venvPath": "/home/girish/.local/share/virtualenvs",
+    "python.pipenvPath": "/home/girish/.pyenv/shims/pipenv",
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["-t", "py38", "-l", "100"],
+    "python.linting.pylintEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyArgs": [
+      "--ignore-missing-imports",
+      "--follow-imports=silent",
+      "--show-column-numbers"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.autoComplete.showAdvancedMembers": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestPath": "pytest"
+}
+```
+
+## Github actions locally
 
 ```bash
-pipenv shell
-pip install "https://github.com/matangover/mypyls/archive/master.zip#egg=mypyls[default-mypy]"
+act pull_request -W .github/workflows/
 ```
 
-**NOTE**: If you update the mypy-vscode extension, you may also need to update the mypy language server separately. Do so by running the following command.
+---
 
-```Bash
-pip install -U "https://github.com/matangover/mypyls/archive/master.zip#egg=mypyls[default-mypy]"
-```
+## Reference
+
+* [Running github actions locally](https://github.com/nektos/act)

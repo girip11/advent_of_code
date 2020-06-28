@@ -4,9 +4,7 @@ from typing import List, Sequence, Tuple
 
 
 def main(*_: str) -> None:
-    license_numbers: List[int] = [
-        int(num) for num in re.findall(r"\d+", sys.stdin.readline())
-    ]
+    license_numbers: List[int] = [int(num) for num in re.findall(r"\d+", sys.stdin.readline())]
     metadata_sum = get_metadata_sum(license_numbers)
     print(metadata_sum)
 
@@ -21,9 +19,7 @@ def get_metadata_sum(license_numbers: List[int]) -> int:
     return metadata_sum
 
 
-def get_metadata_indices(
-    license_numbers: List[int], start: int = 0
-) -> Sequence[Tuple[int, int]]:
+def get_metadata_indices(license_numbers: List[int], start: int = 0) -> Sequence[Tuple[int, int]]:
     """Returns the metadata indices range in the license numbers array
 
     Args:
