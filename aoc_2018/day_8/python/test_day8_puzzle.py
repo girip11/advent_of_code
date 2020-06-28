@@ -9,9 +9,7 @@ from aoc_2018.day_8.python import day8_puzzle_part1, day8_puzzle_part2
 def get_license_numbers(file_name: str) -> List[int]:
     file_path = os.path.join(Path(os.path.dirname(__file__)).parent, file_name)
     with open(file_path) as input_file:
-        license_numbers = [
-            int(match) for match in re.findall(r"\d+", input_file.readline())
-        ]
+        license_numbers = [int(match) for match in re.findall(r"\d+", input_file.readline())]
 
     return license_numbers
 

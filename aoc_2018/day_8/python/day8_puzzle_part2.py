@@ -5,9 +5,7 @@ from typing import Iterable, List, Optional, Tuple
 
 
 def main(*_: str) -> None:
-    license_numbers: List[int] = [
-        int(num) for num in re.findall(r"\d+", sys.stdin.readline())
-    ]
+    license_numbers: List[int] = [int(num) for num in re.findall(r"\d+", sys.stdin.readline())]
 
     root = get_nodes(license_numbers, start=0)
 
