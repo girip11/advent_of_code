@@ -94,9 +94,7 @@ class ProximityGrid:
         return distances[0][0]
 
     def _is_corner_coordinate(self, coordinate: Coordinate) -> bool:
-        return (coordinate.x == 0 or coordinate.x == self._grid_size - 1) or (
-            coordinate.y == 0 or coordinate.y == self._grid_size - 1
-        )
+        return coordinate.x in [0, self._grid_size - 1] or coordinate.y in [0, self._grid_size - 1]
 
     def proximity_region_size(self, region_size: int) -> int:
         region_coordinates: int = 0
