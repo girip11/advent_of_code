@@ -8,7 +8,7 @@ from aoc_2018.day_10.python.day10_puzzle import time_taken_for_msg, get_points, 
 def get_positions(file_name: str) -> List[str]:
     file_path = os.path.join(Path(os.path.dirname(__file__)).parent, file_name)
     with open(file_path) as input_file:
-        positions = [line for line in input_file]
+        positions = input_file.readlines()
 
     return positions
 
