@@ -5,7 +5,7 @@
 
   "ignore": [],
 
-  "venvPath": "/home/girish/.local/share/virtualenvs",
+  "venvPath": ".venv",
 
   "reportTypeshedErrors": false,
   "reportMissingImports": true,
