@@ -27,15 +27,23 @@
     "python.formatting.provider": "black",
     "autoDocstring.docstringFormat": "numpy",
     "python.autoComplete.showAdvancedMembers": true,
-    "python.linting.banditEnabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.mypyEnabled": true,
-    "python.linting.pydocstyleEnabled": true,
+    "python.linting.pydocstyleEnabled": false,
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
 
     "python.testing.pytestEnabled": true,
-    "python.testing.pytestPath": "pytest"
+    "python.testing.pytestPath": "pytest",
+    "emeraldwalk.runonsave": {
+      "commands": [
+        {
+          "match": "\\.py$",
+          "cmd": "${workspaceFolder}/runonsave.sh '${file}'",
+          "isAsync": false
+        }
+      ]
+    }
   }
 }
