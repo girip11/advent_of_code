@@ -2,7 +2,10 @@ import os
 from pathlib import Path
 from typing import List
 
-from aoc_2018.day_12.python.subterranean_sustainability import subterranean_sustainability_part1
+from aoc_2018.day_12.python.subterranean_sustainability import (
+    parse_input_data,
+    subterranean_sustainability,
+)
 
 
 def get_input_data(file_name: str) -> List[str]:
@@ -13,6 +16,6 @@ def get_input_data(file_name: str) -> List[str]:
     return input_data
 
 
-def test_subterranean_sustainability_part1() -> None:
-    result = subterranean_sustainability_part1(get_input_data("simple_input.txt"), 20)
+def test_subterranean_sustainability() -> None:
+    result = subterranean_sustainability(*parse_input_data(get_input_data("simple_input.txt")), 20)
     assert result == 325

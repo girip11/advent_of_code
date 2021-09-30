@@ -110,8 +110,9 @@ def calc_pot_post_generations(
     current_gen_pots = initial_state
     pot_offset = 0
 
-    print(f"Gen: 0 --> {current_gen_pots}, {pot_offset}")
+    # print(f"Gen: 0 --> {current_gen_pots}, {pot_offset}")
     no_change_gens = 0
+    pot_offset_delta = 0
     for gen in range(1, generations + 1):
         next_gen_pots, new_pot_offset = compute_next_generation(
             current_gen_pots, plant_in_pot_rules, pot_offset
@@ -123,11 +124,19 @@ def calc_pot_post_generations(
             no_change_gens = 0
 
         current_gen_pots = next_gen_pots
+        # positive - plants move to right
+        # negative - plants move to left
+        pot_offset_delta = new_pot_offset - pot_offset
         pot_offset = new_pot_offset
-        print(f"Gen: {gen} --> {current_gen_pots}, {pot_offset}")
+        # print(f"Gen: {gen} --> {current_gen_pots}, {pot_offset}")
 
         if no_change_gens >= 1:
             break
+
+    if gen < generations:
+        # early exit
+        # adjust the pot_offset
+        pot_offset += pot_offset_delta * (generations - gen)
 
     return (current_gen_pots, pot_offset)
 
@@ -147,38 +156,23 @@ def parse_input_data(input_data: List[str]) -> Tuple[str, Set[str]]:
     return (initial_state, plant_in_pot_rules)
 
 
-def subterranean_sustainability_part1(input_data: List[str], generations: int) -> int:
-    initial_state, plant_in_pot_rules = parse_input_data(input_data)
+def subterranean_sustainability(
+    initial_state: str, plant_in_pot_rules: Set[str], generations: int
+) -> int:
     current_gen_pots, pot_offset = calc_pot_post_generations(
         generations, initial_state, plant_in_pot_rules
     )
-    return sum((i + pot_offset) for i, pot in enumerate(current_gen_pots) if pot == PLANT)
-
-
-# Since I tried getting only the sum and not worry about the pot numbers
-# I had to manually code this section.
-# TODO: fix the code to work automatically
-def subterranean_sustainability_part2(input_data: List[str], generations: int) -> int:
-    initial_state, plant_in_pot_rules = parse_input_data(input_data)
-    current_gen_pots, pot_offset = calc_pot_post_generations(
-        generations, initial_state, plant_in_pot_rules
-    )
-    # Manually observed a pattern where after 117 generations, pot_offset kept increasing by 1
-    # for every new generation. Basically the pots started moving the the right by 1
-    # unit every generation.
-    pot_offset = generations - 50
     return sum((i + pot_offset) for i, pot in enumerate(current_gen_pots) if pot == PLANT)
 
 
 def main(_: List[str]) -> None:
-    # generations = 20
-    # pot_number_sum = subterranean_sustainability_part1(sys.stdin.readlines(), generations)
-    # print(pot_number_sum)
+    input_data = sys.stdin.readlines()
+    initial_state, plant_in_pot_rules = parse_input_data(input_data)
 
-    # part-2
-    generations = 50000000000
-    pot_number_sum = subterranean_sustainability_part2(sys.stdin.readlines(), generations)
-    print(pot_number_sum)
+    # part-1 20 generations and part-2 5 billion generations
+    for gen in [20, 50000000000]:
+        pot_number_sum = subterranean_sustainability(initial_state, plant_in_pot_rules, gen)
+        print(f"Sum after {gen} generations: {pot_number_sum}")
 
 
 if __name__ == "__main__":
