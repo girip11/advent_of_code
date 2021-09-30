@@ -1,7 +1,4 @@
-from aoc_2015.day_1.python.day1_puzzle import (
-    get_dest_floor,
-    get_first_basement_ins_pos,
-)
+from aoc_2015.day_1.python.day1_puzzle import get_dest_floor, get_first_basement_ins_pos
 
 
 def test_get_dest_floor() -> None:

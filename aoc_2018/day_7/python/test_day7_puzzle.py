@@ -3,8 +3,8 @@ from pathlib import Path
 from typing import List
 
 from aoc_2018.day_7.python.day7_puzzle import (
-    computer_instructions_traversal_order,
     compute_traversal_duration,
+    computer_instructions_traversal_order,
 )
 
 
@@ -16,7 +16,7 @@ def get_raw_instructions(file_name: str) -> List[str]:
     return raw_instructions
 
 
-def test_part1():
+def test_part1() -> None:
     raw_instructions: List[str] = get_raw_instructions("simple_input.txt")
     assert computer_instructions_traversal_order(iter(raw_instructions)) == "CABDFE"
 
@@ -27,7 +27,7 @@ def test_part1():
     )
 
 
-def test_part2():
+def test_part2() -> None:
     raw_instructions: List[str] = get_raw_instructions("simple_input.txt")
     assert compute_traversal_duration(iter(raw_instructions), 2) == 258
 

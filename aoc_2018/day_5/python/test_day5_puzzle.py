@@ -1,6 +1,6 @@
 from aoc_2018.day_5.python.day5_puzzle import (
-    polymer_units_after_reaction,
     find_best_polymer_reaction,
+    polymer_units_after_reaction,
 )
 
 

@@ -57,7 +57,7 @@ class Marble:
 class MarbleGame:
     MAGIC_MARBLE_POSITION_SHIFT: ClassVar[int] = 7
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._current_marble = Marble(0)
 
     def place_marble(self, marble_value: int) -> int:

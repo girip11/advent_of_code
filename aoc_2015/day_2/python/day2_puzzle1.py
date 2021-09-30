@@ -1,7 +1,7 @@
-from dataclasses import dataclass
 import sys
+from dataclasses import dataclass
 from functools import reduce
-from typing import Callable, List, Iterable, Tuple
+from typing import Callable, Iterable, List, Tuple
 
 
 @dataclass(init=False)
@@ -37,22 +37,22 @@ class PresentBox:
 
 
 def find_wrapping_paper_length(present_boxes: Iterable[PresentBox]) -> int:
-    func: Callable[
-        [int, PresentBox], int
-    ] = lambda acc, pb: acc + pb.area() + pb.smallest_side_area()
+    func: Callable[[int, PresentBox], int] = (
+        lambda acc, pb: acc + pb.area() + pb.smallest_side_area()
+    )
     return reduce(func, present_boxes, 0)
 
 
 def find_ribbon_length(present_boxes: Iterable[PresentBox]) -> int:
-    func: Callable[
-        [int, PresentBox], int
-    ] = lambda acc, pb: acc + pb.smallest_side_perimeter() + pb.volume()
+    func: Callable[[int, PresentBox], int] = (
+        lambda acc, pb: acc + pb.smallest_side_perimeter() + pb.volume()
+    )
     return reduce(func, present_boxes, 0)
 
 
 def main(*_: str) -> None:
     """
-        This is the entry point.
+    This is the entry point.
     """
     present_boxes: List[PresentBox] = [PresentBox(*map(int, dim.split("x"))) for dim in sys.stdin]
 

@@ -1,6 +1,6 @@
 import sys
 from functools import reduce
-from typing import Dict, List, Iterable, MutableMapping, Tuple
+from typing import Dict, Iterable, List, MutableMapping, Tuple
 
 
 class Direction:
@@ -80,7 +80,7 @@ def houses_gifted_by_santa_and_robot(navigation: Iterable[str]) -> int:
 
 def main(_: List[str]) -> None:
     """
-        This is the entry point.
+    This is the entry point.
     """
     navigation: str = sys.stdin.read().strip()
     print(f"Houses with multiple gifts: {houses_gifted_by_santa(navigation)}")

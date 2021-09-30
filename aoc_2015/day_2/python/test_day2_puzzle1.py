@@ -1,6 +1,6 @@
 from typing import List
 
-from .day2_puzzle1 import PresentBox, find_wrapping_paper_length, find_ribbon_length
+from .day2_puzzle1 import PresentBox, find_ribbon_length, find_wrapping_paper_length
 
 
 def test_find_wrapping_paper_length() -> None:

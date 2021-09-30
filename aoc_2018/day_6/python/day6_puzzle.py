@@ -1,7 +1,7 @@
-import sys
 import itertools
+import sys
 from dataclasses import dataclass
-from typing import List, Dict, MutableSet, NamedTuple, Optional, Tuple
+from typing import Dict, List, MutableSet, NamedTuple, Optional, Tuple
 
 
 @dataclass(init=False, frozen=True)
@@ -57,7 +57,8 @@ class ProximityGrid:
         ]
 
         largest_area_coordinate: int = max(
-            coordinates_with_finite_area, key=lambda sc_id: area[sc_id],
+            coordinates_with_finite_area,
+            key=lambda sc_id: area[sc_id],
         )
 
         print(

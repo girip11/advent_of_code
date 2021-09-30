@@ -1,8 +1,8 @@
+import itertools
 import re
 import sys
-import itertools
-from typing import ClassVar, Iterator, List, Tuple, Set
 from dataclasses import dataclass
+from typing import ClassVar, Iterator, List, Set, Tuple
 
 
 def main(*_: str) -> None:
@@ -22,12 +22,12 @@ class Point:
     x_vel: int
     y_vel: int
 
-    def move(self):
+    def move(self) -> None:
         self.x_pos += self.x_vel
         self.y_pos += self.y_vel
 
     @staticmethod
-    def to_set(points) -> Set[Tuple[int, int]]:
+    def to_set(points: List["Point"]) -> Set[Tuple[int, int]]:
         return {(point.x_pos, point.y_pos) for point in points}
 
     @staticmethod
@@ -36,7 +36,9 @@ class Point:
         return Point(*map(int, position.groups()), *map(int, velocity.groups()))
 
 
-def get_points(raw_input: Iterator[str],) -> List[Point]:
+def get_points(
+    raw_input: Iterator[str],
+) -> List[Point]:
     return [Point.from_text(position_text) for position_text in raw_input]
 
 
@@ -76,7 +78,7 @@ def min_max_positions(points: List[Point]) -> Tuple[int, int, int, int]:
     )
 
 
-def display_points(points: List[Point]):
+def display_points(points: List[Point]) -> None:
     current_positions = Point.to_set(points)
     min_x, max_x, min_y, max_y = min_max_positions(points)
 

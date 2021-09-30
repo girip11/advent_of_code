@@ -1,13 +1,12 @@
 import sys
-
 from itertools import cycle
 from typing import List, MutableSet, Optional
 
 
 def find_first_repeating_frequency(frequencies: List[int]) -> Optional[int]:
     """
-        Input: Accepts an array containing a positive or negative frequency value.
-        This methods returns the first repeating among the aggregated frequencies.
+    Input: Accepts an array containing a positive or negative frequency value.
+    This methods returns the first repeating among the aggregated frequencies.
     """
     first_repeating_frequency = None
 
@@ -34,7 +33,7 @@ def find_first_repeating_frequency(frequencies: List[int]) -> Optional[int]:
 
 def main(*_: str) -> None:
     """
-        This is the entry point.
+    This is the entry point.
     """
     input_frequencies: List[int] = list(map(int, sys.stdin))
 

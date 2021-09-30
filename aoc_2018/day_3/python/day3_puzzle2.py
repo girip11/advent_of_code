@@ -1,5 +1,5 @@
 import sys
-from typing import List, Tuple, Optional
+from typing import List, Optional, Tuple
 
 from aoc_2018.day_3.python.day3_puzzle1 import (
     Claim,

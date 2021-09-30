@@ -14,15 +14,15 @@ def get_license_numbers(file_name: str) -> List[int]:
     return license_numbers
 
 
-def test_part1_metadata_sum():
+def test_part1_metadata_sum() -> None:
     license_numbers: List[int] = get_license_numbers("simple_input.txt")
     assert day8_puzzle_part1.get_metadata_sum(license_numbers) == 138
 
-    license_numbers: List[int] = get_license_numbers("puzzle_input.txt")
+    license_numbers = get_license_numbers("puzzle_input.txt")
     assert day8_puzzle_part1.get_metadata_sum(license_numbers) == 40701
 
 
-def test_part2_metadata_sum():
+def test_part2_metadata_sum() -> None:
     files_to_output_map = {"simple_input.txt": 138, "puzzle_input.txt": 40701}
 
     for file_name, output in files_to_output_map.items():
@@ -32,7 +32,7 @@ def test_part2_metadata_sum():
         assert day8_puzzle_part2.get_metadata_sum(root_node) == output
 
 
-def test_part2_root_node_value():
+def test_part2_root_node_value() -> None:
     files_to_output_map = {"simple_input.txt": 66, "puzzle_input.txt": 21399}
 
     for file_name, output in files_to_output_map.items():

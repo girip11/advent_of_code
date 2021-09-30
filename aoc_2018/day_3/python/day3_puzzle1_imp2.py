@@ -1,6 +1,6 @@
 import sys
-from typing import List, MutableMapping
 from functools import reduce
+from typing import List, MutableMapping
 
 from aoc_2018.day_3.python.day3_puzzle1 import Claim, parse_claim
 
@@ -19,7 +19,9 @@ def find_square_inches_with_overlapping_claims(claims: List[Claim]) -> int:
                     all_points[claim_pos] = [claim.claim_id]
 
     return reduce(
-        lambda total, item: (total + 1) if len(item[1]) >= 2 else total, all_points.items(), 0,
+        lambda total, item: (total + 1) if len(item[1]) >= 2 else total,
+        all_points.items(),
+        0,
     )
 
 

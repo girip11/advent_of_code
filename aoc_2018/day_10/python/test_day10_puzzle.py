@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import List
 
-from aoc_2018.day_10.python.day10_puzzle import time_taken_for_msg, get_points, Point
+from aoc_2018.day_10.python.day10_puzzle import Point, get_points, time_taken_for_msg
 
 
 def get_positions(file_name: str) -> List[str]:
@@ -13,9 +13,9 @@ def get_positions(file_name: str) -> List[str]:
     return positions
 
 
-def test_time_taken_for_msg_formation():
-    points: List[Point] = get_points(get_positions("simple_input.txt"))
+def test_time_taken_for_msg_formation() -> None:
+    points: List[Point] = get_points(iter(get_positions("simple_input.txt")))
     assert time_taken_for_msg(points) == 3
 
-    points: List[Point] = get_points(get_positions("puzzle_input.txt"))
+    points = get_points(iter(get_positions("puzzle_input.txt")))
     assert time_taken_for_msg(points) == 10932

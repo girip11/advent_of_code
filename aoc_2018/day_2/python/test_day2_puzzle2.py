@@ -13,5 +13,5 @@ def test_find_common_letters_corner_case() -> None:
     assert find_common_letters(input_words) == "abcef"
 
 
-def test_find_common_letters_large():
+def test_find_common_letters_large() -> None:
     assert find_common_letters(get_input("puzzle_input.txt")) == "pebjqsalrdnckzfihvtxysomg"

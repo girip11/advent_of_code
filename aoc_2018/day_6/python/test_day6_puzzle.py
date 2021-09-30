@@ -1,4 +1,5 @@
 from typing import List, Tuple
+
 from .day6_puzzle import ProximityGrid
 
 

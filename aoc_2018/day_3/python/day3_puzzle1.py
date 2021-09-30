@@ -1,6 +1,6 @@
 import sys
-from typing import List, Tuple
 from functools import reduce
+from typing import List, Tuple
 
 
 class Claim:
@@ -27,7 +27,7 @@ class Claim:
 
     def __str__(self) -> str:
         """Returns the string representation in the format
-            '<claim id> @ <x_offset>,<y_offset>: <width>x<height>'
+        '<claim id> @ <x_offset>,<y_offset>: <width>x<height>'
         """
         return f"{self.claim_id} @ {self.x_offset},{self.y_offset}: {self.width}x{self.height}"
 

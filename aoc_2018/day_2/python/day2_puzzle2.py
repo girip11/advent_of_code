@@ -1,6 +1,6 @@
 import sys
 from itertools import combinations
-from typing import List, Optional, Iterable
+from typing import Iterable, List, Optional
 
 
 def find_common_letters(box_ids: List[str]) -> Optional[str]:
@@ -41,9 +41,9 @@ def _get_common_letters(box_id1: str, box_id2: str) -> str:
     return "".join(common_letters)
 
 
-def main(*_: str):
+def main(*_: str) -> None:
     """
-        This is the entry point.
+    This is the entry point.
     """
     box_ids: List[str] = [box_id.strip() for box_id in sys.stdin]
     print(f"Checksum: {find_common_letters(box_ids)}")

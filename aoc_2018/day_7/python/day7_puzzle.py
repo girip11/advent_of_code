@@ -68,7 +68,9 @@ def get_root_elements(prerequisite_map: Mapping[str, List[str]]) -> List[str]:
 
 
 def traverse_instructions(
-    root: str, prerequisite_map: Dict[str, List[str]], dependency_graph: Dict[str, List[str]],
+    root: str,
+    prerequisite_map: Dict[str, List[str]],
+    dependency_graph: Dict[str, List[str]],
 ) -> str:
     # this is a min heap, sorts by ascending order
     steps_to_complete: List[str] = []

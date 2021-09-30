@@ -1,6 +1,6 @@
 import sys
 from functools import reduce
-from typing import Iterable, Set, List, Tuple
+from typing import Iterable, List, Set, Tuple
 
 
 def calculate_checksum(box_ids: Iterable[str]) -> int:
@@ -40,9 +40,9 @@ def _get_repeating_chars_count(box_id: str) -> Tuple[int, int]:
     return int(2 in unique_char_counts), int(3 in unique_char_counts)
 
 
-def main(*_: str):
+def main(*_: str) -> None:
     """
-        This is the entry point.
+    This is the entry point.
     """
     box_ids: Iterable[str] = (box_id.strip() for box_id in sys.stdin)
     print(f"Checksum: {calculate_checksum(box_ids)}")

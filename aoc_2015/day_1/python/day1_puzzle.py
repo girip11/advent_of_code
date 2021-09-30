@@ -21,7 +21,7 @@ def get_first_basement_ins_pos(floor_instructions: str) -> int:
 
 def main(*_: str) -> None:
     """
-        This is the entry point.
+    This is the entry point.
     """
     floor_instructions: str = sys.stdin.read().strip()
     print(f"Floor: {get_dest_floor(floor_instructions)}")

@@ -1,16 +1,14 @@
-from datetime import datetime, timedelta
-from dataclasses import dataclass
-
 import itertools
 import re
 import sys
-
-from typing import Dict, List, Mapping, Optional, Pattern, Tuple
+from dataclasses import dataclass
+from datetime import datetime, timedelta
 from functools import reduce
+from typing import Dict, List, Mapping, Optional, Pattern, Tuple
 
 
 class GuardActivity:
-    def __init__(self):
+    def __init__(self) -> None:
         self._duty_days: Dict[str, List[Tuple[int, int]]] = {}
 
     def add_duty_day(self, day: str) -> None:
@@ -64,8 +62,7 @@ class GuardActivityLog:
         pattern = r".*#(\d*).*"
 
         if self.is_shift_start_log() and (match := re.match(pattern, self.msg)):
-            # match is already checked for None. Suppressing mypy check
-            return int(match.groups()[0])  # type: ignore
+            return int(match.groups()[0])
 
         return None
 
