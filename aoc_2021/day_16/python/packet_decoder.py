@@ -31,22 +31,25 @@ class OperatorPacket(Packet):
         super().__init__(version, type_)
 
     def evaluate(self) -> int:
+        result: int
         if self.type_ == 0:
-            return sum(subpacket.evaluate() for subpacket in self.subpackets)
+            result = sum(subpacket.evaluate() for subpacket in self.subpackets)
         elif self.type_ == 1:
-            return reduce(mul, (subpacket.evaluate() for subpacket in self.subpackets), 1)
+            result = reduce(mul, (subpacket.evaluate() for subpacket in self.subpackets), 1)
         elif self.type_ == 2:
-            return min(subpacket.evaluate() for subpacket in self.subpackets)
+            result = min(subpacket.evaluate() for subpacket in self.subpackets)
         elif self.type_ == 3:
-            return max(subpacket.evaluate() for subpacket in self.subpackets)
+            result = max(subpacket.evaluate() for subpacket in self.subpackets)
         elif self.type_ == 5:
-            return 1 if gt(self.subpackets[0].evaluate(), self.subpackets[1].evaluate()) else 0
+            result = 1 if gt(self.subpackets[0].evaluate(), self.subpackets[1].evaluate()) else 0
         elif self.type_ == 6:
-            return 1 if lt(self.subpackets[0].evaluate(), self.subpackets[1].evaluate()) else 0
+            result = 1 if lt(self.subpackets[0].evaluate(), self.subpackets[1].evaluate()) else 0
         elif self.type_ == 7:
-            return 1 if eq(self.subpackets[0].evaluate(), self.subpackets[1].evaluate()) else 0
+            result = 1 if eq(self.subpackets[0].evaluate(), self.subpackets[1].evaluate()) else 0
         else:
-            return 0
+            raise Exception("Invalid packet type.")
+
+        return result
 
 
 @dataclass
