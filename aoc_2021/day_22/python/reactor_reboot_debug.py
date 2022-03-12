@@ -1,4 +1,5 @@
 """Though inefficient, I used this script for debugging the actual solution."""
+# pylint: disable-all
 import sys
 from dataclasses import dataclass
 from typing import Iterator, List, Set, Tuple

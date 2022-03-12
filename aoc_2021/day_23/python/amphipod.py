@@ -93,12 +93,12 @@ class Configuration:
         content: List[str] = ["#############", f"#{self.hallway}#"]
         start = self.siderooms[0].room_size - 1
         for i in range(start, -1, -1):
-            s = "#".join(f"{sideroom[i]}" for sideroom in self.siderooms)
+            str_ = "#".join(f"{sideroom[i]}" for sideroom in self.siderooms)
             if i == start:
-                s = f"###{s}###"
+                str_ = f"###{str_}###"
             else:
-                s = f"  #{s}#"
-            content.append(s)
+                str_ = f"  #{str_}#"
+            content.append(str_)
 
         content.append("  #########")
         content.append(f"Energy : {self.energy_spent}")
@@ -294,7 +294,7 @@ def parse_input(lines: List[str]) -> Configuration:
     return Configuration(hallway, siderooms)
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     input_lines = sys.stdin.readlines()
     configuration: Configuration = parse_input(input_lines)
     print(configuration)

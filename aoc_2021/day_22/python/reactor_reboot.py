@@ -27,7 +27,7 @@ class Cuboid:
         )
 
     def __contains__(self, point: Point) -> bool:
-        x, y, z = point
+        x, y, z = point  # pylint: disable=invalid-name
         return x in self.x_range and y in self.y_range and z in self.z_range
 
     def does_enclose(self, other: "Cuboid") -> bool:
@@ -92,7 +92,7 @@ class Cuboid:
 
         return nonoverlapping_ranges
 
-    def split(self, overlap_region: "Cuboid", *, exclude_overlap: bool) -> List["Cuboid"]:
+    def split(self, overlap_region: "Cuboid") -> List["Cuboid"]:
         split_regions: List[Cuboid] = []
         for x_range in self._get_non_overlapping_ranges("x", overlap_region.x_range):
             split_regions.append(Cuboid(x_range, self.y_range, self.z_range))
@@ -115,7 +115,7 @@ class Cuboid:
 
 @dataclass(frozen=True)
 class RebootStep:
-    on: bool
+    on: bool  # pylint: disable=invalid-name
     cuboid: Cuboid
 
     def __str__(self) -> str:
@@ -135,7 +135,7 @@ def process_on_step(on_regions: Set[Cuboid], on_region: Cuboid) -> None:
                 # when overlapping existing regions should be split to exclude the overlap of
                 # on_region
                 on_regions.remove(cur_region)
-                for reg in cur_region.split(overlap_reg, exclude_overlap=True):
+                for reg in cur_region.split(overlap_reg):
                     on_regions.add(reg)
             else:
                 ...
@@ -165,12 +165,12 @@ def process_off_step(on_regions: Set[Cuboid], off_region: Cuboid) -> None:
             on_regions.remove(on_region)
         elif on_region.does_enclose(off_region):
             on_regions.remove(on_region)
-            for r in on_region.split(off_region, exclude_overlap=True):
-                on_regions.add(r)
+            for reg in on_region.split(off_region):
+                on_regions.add(reg)
         elif overlap_region := on_region.does_overlap(off_region):
             on_regions.remove(on_region)
-            for r in on_region.split(overlap_region, exclude_overlap=True):
-                on_regions.add(r)
+            for reg in on_region.split(overlap_region):
+                on_regions.add(reg)
         else:
             ...
 
@@ -211,7 +211,7 @@ def parse_input(lines: List[str]) -> List[RebootStep]:
     return steps
 
 
-def main(*args: str) -> None:
+def main(*_: str) -> None:
     reboot_steps: List[RebootStep] = parse_input(sys.stdin.readlines())
 
     print(f"Total reboot steps: {len(reboot_steps)}")

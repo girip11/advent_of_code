@@ -26,7 +26,6 @@
     "python.pipenvPath": "/home/girish/.pyenv/shims/pipenv",
     "python.formatting.provider": "black",
     "autoDocstring.docstringFormat": "numpy",
-    "python.autoComplete.showAdvancedMembers": true,
     "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.mypyEnabled": true,
