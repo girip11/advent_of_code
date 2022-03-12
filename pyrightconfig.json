@@ -1,5 +1,5 @@
 {
-  "include": ["aoc_2015", "aoc_2018"],
+  "include": ["aoc_*"],
 
   "exclude": ["**/node_modules", "**/__pycache__"],
 
