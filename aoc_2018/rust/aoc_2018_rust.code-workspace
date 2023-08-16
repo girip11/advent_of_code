@@ -1,0 +1,137 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.renderWhitespace": "all",
+
+    "[markdown]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.markdownlint": true
+      },
+      "editor.wordWrap": "wordWrapColumn",
+      "editor.wrappingIndent": "none"
+    },
+    "[python]": {
+      "editor.wordWrapColumn": 100
+    },
+    "[rust]": {
+      "editor.formatOnSave": true,
+      "editor.inlayHints.enabled": "off",
+      "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+      }
+    },
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "editor.detectIndentation": false,
+    "editor.fontSize": 18,
+    "editor.fontFamily": "Monaco monospace",
+
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash",
+        "args": ["-l"]
+      }
+    },
+    "terminal.integrated.defaultProfile.osx": "bash",
+    "terminal.integrated.profiles.osx": {
+      "bash": {
+        "path": "bash",
+        "args": ["-l"]
+      }
+    },
+    "terminal.integrated.env.osx": {
+      "RUSTUP_INSTALLATION_DIRECTORY": "${env:HOME}/.rustup",
+      "TOOLCHAIN": "nightly-aarch64-apple-darwin"
+    },
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontFamily": "Monaco monospace",
+    "git.autorefresh": true,
+    "markdownlint.ignore": ["**/*.md.html"],
+    "files.insertFinalNewline": true,
+    "files.associations": {
+      "*.md.html": "markdown"
+    },
+    "shellcheck.enable": true,
+    "shellcheck.useWorkspaceRootAsCwd": true,
+    "shellcheck.run": "onSave",
+    "shellformat.flag": "-i 2 -ci -sr -bn",
+    "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
+    "rust-analyzer.cachePriming.enable": true,
+    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.cargo.autoreload": true,
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.check.allTargets": true,
+    "rust-analyzer.check.extraArgs": ["--fix", "--allow-dirty"],
+    // "rust-analyzer.rustfmt.overrideCommand": null,
+    "editor.semanticTokenColorCustomizations": {
+      "rules": {
+        "*.mutable": {
+          // set to empty string to disable underline, which is the default
+          "fontStyle": "underline strikethrough"
+        }
+      }
+    }
+    // "rust-analyzer.linkedProjects": ["./Cargo.toml"]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Rust AOC Build task",
+        "command": "cargo",
+        "options": {
+          "env": { "PATH": "${env:HOME}/.cargo/bin:/usr/bin:$PATH" }
+        },
+        "type": "shell",
+        "args": ["build", "-v", "--bin", "aoc_2018_${fileDirnameBasename}"],
+        "group": "build",
+        "problemMatcher": [
+          {
+            "owner": "rust",
+            "fileLocation": ["relative", "${workspaceRoot}"],
+            "pattern": {
+              "regexp": "^(.*):(\\d+):(\\d+):\\s+(\\d+):(\\d+)\\s+(warning|error):\\s+(.*)$",
+              "file": 1,
+              "line": 2,
+              "column": 3,
+              "endLine": 4,
+              "endColumn": 5,
+              "severity": 6,
+              "message": 7
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "lldb",
+        "request": "launch",
+        "name": "run aoc",
+        "preLaunchTask": "Rust AOC Build task",
+        "program": "${workspaceFolder}/target/debug/aoc_2018_${fileDirnameBasename}",
+        "args": [
+          "/media/girish/HDD/code_repos/github/repos/advent_of_code/aoc_2018/day_1/puzzle_input.txt"
+        ],
+        "cwd": "${workspaceFolder}",
+        "sourceMap": {},
+        "sourceLanguages": ["rust"],
+        "env": {
+          "RUST_BACKTRACE": "short",
+          "APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL": "true"
+        }
+      }
+    ]
+  }
+}

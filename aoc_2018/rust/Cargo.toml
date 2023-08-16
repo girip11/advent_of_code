@@ -1,0 +1,22 @@
+[package]
+name = "day_1"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+
+[[bin]]
+name = "aoc_2018_day1"
+path = "src/day1/main.rs"
+
+[[bin]]
+name = "aoc_2018_day2"
+path = "src/day2/main.rs"
+
+[lib]
+name = "utils"           # The name of the target.
+path = "src/lib.rs"    # The source file of the target.
+crate-type = ["lib"]   # The crate types to generate.
