@@ -41,3 +41,18 @@ fn main() {
     let repeating_frequency = find_first_repeating_frequency(&frequencies);
     println!("First repeating frequency: {repeating_frequency}");
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{compute_total_frequency, find_first_repeating_frequency};
+
+    #[test]
+    fn test_compute_total_frequence() {
+        assert!(compute_total_frequency(&[-1, 10, -5]) == 4);
+    }
+
+    #[test]
+    fn test_find_first_repeating_frequency() {
+        assert!(find_first_repeating_frequency(&[3, 3, 4, -2, -4]) == 10);
+    }
+}
