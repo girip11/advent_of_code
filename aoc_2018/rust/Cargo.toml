@@ -20,3 +20,6 @@ path = "src/day2/main.rs"
 name = "utils"           # The name of the target.
 path = "src/lib.rs"    # The source file of the target.
 crate-type = ["lib"]   # The crate types to generate.
+
+[dev-dependencies]
+microbench = "0.5.0"
