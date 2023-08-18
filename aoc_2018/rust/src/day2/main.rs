@@ -39,7 +39,7 @@ fn calculate_checksum(box_ids: &[String]) -> u64 {
         .expect("Checksum overflow!")
 }
 
-fn find_common_letters(box_ids: &[String]) -> String {
+fn find_common_letters(box_ids: &[String]) -> Result<String, &str> {
     let mut box_iter = box_ids.iter().enumerate();
     let total_box_ids = box_ids.len();
 
@@ -55,16 +55,16 @@ fn find_common_letters(box_ids: &[String]) -> String {
                         == 1
                 })
             {
-                break box_id
+                break Ok(box_id
                     .chars()
                     .zip(matching_box_id.chars())
                     .filter(|pair| pair.0 == pair.1)
                     .map(|pair| pair.0)
-                    .collect::<String>();
+                    .collect::<String>());
             }
         } else {
             // iterator ended
-            break String::from("");
+            break Err("Unable to find the matching box id.");
         }
     }
 }
@@ -80,7 +80,7 @@ fn main() {
     println!("Day 2, Part-1: {checksum}");
 
     let common_letters = find_common_letters(&box_ids);
-    println!("Day 2, Part-2: {common_letters}");
+    println!("Day 2, Part-2: {}", common_letters.unwrap());
 }
 
 #[cfg(test)]
@@ -112,6 +112,6 @@ mod tests {
             "axcye".to_string(),
             "wvxyz".to_string(),
         ];
-        assert!(find_common_letters(&box_ids) == *"fgij");
+        assert!(find_common_letters(&box_ids).is_ok_and(|r| r == *"fgij"));
     }
 }
