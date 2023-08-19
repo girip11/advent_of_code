@@ -24,6 +24,11 @@ path = "src/day3/main.rs"
 name = "aoc_2018_day4"
 path = "src/day4/main.rs"
 
+
+[[bin]]
+name = "aoc_2018_day5"
+path = "src/day5/main.rs"
+
 [lib]
 name = "utils"           # The name of the target.
 path = "src/lib.rs"    # The source file of the target.
