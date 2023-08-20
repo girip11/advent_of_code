@@ -21,10 +21,10 @@ fn find_first_repeating_frequency(frequencies: &[i64]) -> i64 {
     loop {
         let freq = freqs.next().unwrap();
         total_frequency += freq;
-        if frequencies_seen.contains(&total_frequency) {
+
+        if !frequencies_seen.insert(total_frequency) {
             break total_frequency;
         }
-        frequencies_seen.insert(total_frequency);
     }
 }
 

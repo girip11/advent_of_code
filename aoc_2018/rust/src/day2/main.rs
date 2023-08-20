@@ -1,6 +1,8 @@
-use std::{collections::HashMap, env};
+use std::env;
 
 use utils::config;
+
+
 
 fn parse_input(input_text: &str) -> Vec<String> {
     input_text
@@ -14,24 +16,21 @@ fn calculate_checksum(box_ids: &[String]) -> u64 {
     let mut triple_counts = 0_u64;
 
     box_ids.iter().for_each(|box_id| {
-        let mut count_tracker = HashMap::<char, u64>::new();
+        let mut count_tracker = [0_u8; 26];
 
         box_id.chars().for_each(|letter| {
-            count_tracker
-                .entry(letter)
-                .and_modify(|c| *c += 1)
-                .or_insert(1);
+            count_tracker[letter as usize - 'a' as usize] += 1;
         });
 
-        count_tracker
-            .values()
-            .any(|c| *c == 2)
-            .then(|| double_counts += 1);
+        let (double, triple) = count_tracker
+            .iter()
+            .map(|c| (*c == 2, *c == 3))
+            .fold((false, false), |(d_acc, t_acc), (double, triple)| {
+                (d_acc || double, t_acc || triple)
+            });
 
-        count_tracker
-            .values()
-            .any(|c| *c == 3)
-            .then(|| triple_counts += 1);
+        double.then(|| double_counts += 1);
+        triple.then(|| triple_counts += 1);
     });
 
     double_counts
@@ -39,32 +38,24 @@ fn calculate_checksum(box_ids: &[String]) -> u64 {
         .expect("Checksum overflow!")
 }
 
-fn find_common_letters(box_ids: &[String]) -> Result<String, &str> {
+fn find_common_letters(box_ids: &[String]) -> String {
     let mut box_iter = box_ids.iter().enumerate();
-    let total_box_ids = box_ids.len();
 
     loop {
-        if let Some((i, box_id)) = box_iter.next() {
-            if let Some(matching_box_id) = ((i + 1)..total_box_ids)
-                .map(|j| box_ids.get(j).unwrap())
-                .find(|other_box_id| {
+        if let Some(correct_box_id) = box_iter.next().and_then(|(i, box_id)| {
+            box_ids
+                .iter()
+                .skip(i + 1)
+                .map(|other_box_id| {
                     box_id
                         .chars()
                         .zip(other_box_id.chars())
-                        .fold(0, |acc, pair| if pair.0 != pair.1 { acc + 1 } else { acc })
-                        == 1
+                        .filter_map(|(c1, c2)| if c1 == c2 { Some(c1) } else { None })
+                        .collect::<String>()
                 })
-            {
-                break Ok(box_id
-                    .chars()
-                    .zip(matching_box_id.chars())
-                    .filter(|pair| pair.0 == pair.1)
-                    .map(|pair| pair.0)
-                    .collect::<String>());
-            }
-        } else {
-            // iterator ended
-            break Err("Unable to find the matching box id.");
+                .find(|common_chars| box_id.len() - common_chars.len() == 1)
+        }) {
+            break correct_box_id;
         }
     }
 }
@@ -80,7 +71,7 @@ fn main() {
     println!("Day 2, Part-1: {checksum}");
 
     let common_letters = find_common_letters(&box_ids);
-    println!("Day 2, Part-2: {}", common_letters.unwrap());
+    println!("Day 2, Part-2: {}", common_letters);
 }
 
 #[cfg(test)]
@@ -112,6 +103,6 @@ mod tests {
             "axcye".to_string(),
             "wvxyz".to_string(),
         ];
-        assert!(find_common_letters(&box_ids).is_ok_and(|r| r == *"fgij"));
+        assert!(find_common_letters(&box_ids) == "fgij");
     }
 }
