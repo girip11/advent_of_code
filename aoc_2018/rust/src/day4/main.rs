@@ -115,7 +115,7 @@ fn compute_guard_sleep_chart(observations: &[Observation]) -> HashMap<u64, Vec<u
 fn find_most_sleepy_guard(guards_sleep_chart: &HashMap<u64, Vec<u64>>) -> u64 {
     let (guard_id, sleep_times) = guards_sleep_chart
         .iter()
-        .max_by(|a, b| a.1.iter().sum::<u64>().cmp(&b.1.iter().sum()))
+        .max_by_key(|(_, sleep_times)| sleep_times.iter().sum::<u64>())
         .unwrap();
 
     println!(
@@ -123,18 +123,18 @@ fn find_most_sleepy_guard(guards_sleep_chart: &HashMap<u64, Vec<u64>>) -> u64 {
         sleep_times.iter().sum::<u64>()
     );
 
-    let most_slept_minute_freq = sleep_times.iter().max().unwrap();
-    let most_slept_minute = sleep_times
+    let (most_slept_minute, most_slept_minute_freq) = sleep_times
         .iter()
-        .position(|i| *i == *most_slept_minute_freq)
-        .unwrap() as u64;
+        .enumerate()
+        .max_by_key(|(_minute, freq)| **freq)
+        .unwrap();
 
     println!(
         "Most slept minute: {} with frequency: {}",
         most_slept_minute, most_slept_minute_freq
     );
 
-    guard_id.checked_mul(most_slept_minute).unwrap()
+    guard_id.checked_mul(most_slept_minute as u64).unwrap()
 }
 
 fn find_most_sleepy_minute(guards_sleep_chart: &HashMap<u64, Vec<u64>>) -> u64 {
@@ -146,17 +146,15 @@ fn find_most_sleepy_minute(guards_sleep_chart: &HashMap<u64, Vec<u64>>) -> u64 {
                 sleep_times
                     .iter()
                     .enumerate()
-                    .max_by(|a, b| a.1.cmp(b.1))
+                    .max_by_key(|(_minute, freq)| **freq)
                     .unwrap(),
             )
         })
-        .max_by(|a, b| a.1 .1.cmp(b.1 .1))
+        .max_by_key(|(_guard_id, (_minute, freq))| **freq)
         .unwrap();
 
     println!("{guard_id} was the most sleepiest on minute {minute} with frequency {freq}");
-    guard_id
-        .checked_mul(u64::try_from(minute).unwrap())
-        .unwrap()
+    guard_id.checked_mul(minute as u64).unwrap()
 }
 
 fn main() {

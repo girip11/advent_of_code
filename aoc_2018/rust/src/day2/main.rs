@@ -2,8 +2,6 @@ use std::env;
 
 use utils::config;
 
-
-
 fn parse_input(input_text: &str) -> Vec<String> {
     input_text
         .split('\n')
@@ -41,19 +39,22 @@ fn calculate_checksum(box_ids: &[String]) -> u64 {
 fn find_common_letters(box_ids: &[String]) -> String {
     let mut box_iter = box_ids.iter().enumerate();
 
+    // I did use loop, so that I can terminate the iteration when the
+    // solution is found.
     loop {
         if let Some(correct_box_id) = box_iter.next().and_then(|(i, box_id)| {
-            box_ids
-                .iter()
-                .skip(i + 1)
-                .map(|other_box_id| {
-                    box_id
-                        .chars()
-                        .zip(other_box_id.chars())
-                        .filter_map(|(c1, c2)| if c1 == c2 { Some(c1) } else { None })
-                        .collect::<String>()
-                })
-                .find(|common_chars| box_id.len() - common_chars.len() == 1)
+            box_ids.iter().skip(i + 1).find_map(|other_box_id| {
+                (box_id.len() == other_box_id.len())
+                    .then(|| {
+                        let common = box_id
+                            .chars()
+                            .zip(other_box_id.chars())
+                            .filter_map(|(c1, c2)| (c1 == c2).then_some(c1))
+                            .collect::<String>();
+                        (box_id.len() - common.len() == 1).then_some(common)
+                    })
+                    .flatten()
+            })
         }) {
             break correct_box_id;
         }

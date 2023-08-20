@@ -166,7 +166,11 @@ fn compute_total_overlapping_positions(santa_fabric: &SantaFabric) -> u64 {
 fn find_unique_elf_claim(claims: &[ElfClaim], santa_fabric: &SantaFabric) -> u64 {
     let mut claim_ids = HashSet::from_iter(claims.iter().map(|claim| claim.claim_id));
     santa_fabric.find_unique_claim(&mut claim_ids);
-    claim_ids.iter().last().unwrap().to_owned()
+    claim_ids
+        .iter()
+        .last()
+        .expect("No unique claims found!")
+        .to_owned()
 }
 
 fn main() {

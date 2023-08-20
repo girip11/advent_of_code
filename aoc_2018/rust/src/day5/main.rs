@@ -35,7 +35,7 @@ fn improve_polymer_reaction(polymers: &str) -> u64 {
         distinct_polymers.insert(p.to_ascii_lowercase());
     });
 
-    distinct_polymers
+    let (p_removed, min_length) = distinct_polymers
         .iter()
         .map(|p| {
             let new_polymer = polymers
@@ -43,11 +43,13 @@ fn improve_polymer_reaction(polymers: &str) -> u64 {
                 .filter(|c| *p != c.to_ascii_lowercase())
                 .collect::<String>();
             let reaction_stack = initiate_polymer_reaction(&new_polymer);
-            (p, u64::try_from(reaction_stack.len()).unwrap())
+            (*p, u64::try_from(reaction_stack.len()).unwrap())
         })
-        .min_by(|a, b| a.1.cmp(&b.1))
-        .unwrap()
-        .1
+        .min_by_key(|(_p_rem, p_len)| *p_len)
+        .unwrap();
+
+    println!("Polymer {p_removed} when removed, yields least length of {min_length}");
+    min_length
 }
 
 fn main() {
