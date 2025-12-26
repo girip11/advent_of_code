@@ -1,3 +1,54 @@
-[tool.black]
-line-length = 100
-target-version = ['py38']
+[project]
+name = "AdventOfCode"
+version = "0.0.1"
+description = "Solution to the advent of code puzzles."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mypy[mypyc]~=1.19.0", # to use mypyc to compile python program
+    "codon-jit~=0.4.4", # to compile to machine code and run
+    "numpy~=2.3.0",
+    "numba~=0.63.0"
+]
+
+[dependency-groups]
+dev = ["ruff>=0.14.0", "setuptools>=80.8.0", "ty>=0.0.6", "wheel>=0.45.1"]
+
+[tool.ruff]
+line-length = 99
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    "W",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # isort
+    "I",
+    # PEP8 naming
+    "N",
+    # debugger
+    "T10",
+    "S",
+    "BLE",
+    "B",
+    "FBT",
+    "RUF",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ty.environment]
+python = "./.venv"
+python-version = "3.13"
+root = [".", "./src"]
+
+[tool.ty.rules]
+# Catch common bugs and unsafe patterns
+possibly-unresolved-reference = "error"
+division-by-zero = "error"

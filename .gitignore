@@ -120,3 +120,4 @@ dmypy.json
 
 # Pycharm
 .idea/
+input.txt
