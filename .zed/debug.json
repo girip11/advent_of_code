@@ -1,0 +1,16 @@
+[
+    {
+        "label": "Python Active File",
+        "adapter": "Debugpy",
+        "program": "$ZED_FILE",
+        "request": "launch",
+        "cwd": "$ZED_WORKTREE_ROOT",
+        "env": {
+            "FLASK_APP": "app",
+            "FLASK_DEBUG": "1",
+        },
+        "args": ["/Volumes/Sam990ExtSSD/projects/github/aoc_2025/src/aoc_2025/day_02/input.txt"],
+        "justMyCode": false,
+        "subProcess": true,
+    },
+]
