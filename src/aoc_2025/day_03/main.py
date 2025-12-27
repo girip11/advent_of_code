@@ -24,21 +24,8 @@ def solve_using_mypyc(input_file: str) -> None:
         )
 
 
-def solve_using_codon(input_file: str) -> None:
-    pass
-    # with open(input_file) as f:
-    #     input_ = f.read().strip()
-    # # prime the JIT
-    # _ = codon_impl.get_invalid_prd_ids_sum(input_)
-    # start_time = time.perf_counter_ns()
-    # passwd = codon_impl.get_invalid_prd_ids_sum(input_)
-    # end_time = time.perf_counter_ns()
-    # print(f"Codon Impl, Password: {passwd}. Time taken: {end_time - start_time}ns")
-
-
 def main(input_file: str) -> None:
     solve_using_mypyc(input_file)
-    # solve_using_codon(input_file)
 
 
 if __name__ == "__main__":
