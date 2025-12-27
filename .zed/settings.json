@@ -21,7 +21,7 @@
     "lsp": {
         "ty": {
             "binary": {
-                "path": "/Volumes/Sam990ExtSSD/projects/github/aoc_2025/.venv/bin/ty",
+                "path": "/Volumes/Sam990ExtSSD/projects/github/advent_of_code/.venv/bin/ty",
                 "arguments": ["server"],
             },
         },

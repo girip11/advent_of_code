@@ -9,7 +9,9 @@
             "FLASK_APP": "app",
             "FLASK_DEBUG": "1",
         },
-        "args": ["/Volumes/Sam990ExtSSD/projects/github/aoc_2025/src/aoc_2025/day_02/input.txt"],
+        "args": [
+            "/Volumes/Sam990ExtSSD/projects/github/advent_of_code/src/aoc_2025/day_03/sample.txt",
+        ],
         "justMyCode": false,
         "subProcess": true,
     },
