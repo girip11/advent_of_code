@@ -11,17 +11,13 @@ def solve_using_mypyc(input_file: str) -> None:
         start_time = time.perf_counter_ns()
         total_joltage = mypyc_impl.get_total_output_joltage_part1(banks=iter(banks))
         end_time = time.perf_counter_ns()
-        print(
-            f"Mypyc Impl, Invalid PRD IDs sum: {total_joltage}. Time taken: {end_time - start_time}ns"
-        )
+        print(f"Mypyc Impl, Total joltage: {total_joltage}. Time taken: {end_time - start_time}ns")
 
-        # part-1
+        # part-2
         start_time = time.perf_counter_ns()
         total_joltage = mypyc_impl.get_total_output_joltage_part2(banks=iter(banks))
         end_time = time.perf_counter_ns()
-        print(
-            f"Mypyc Impl, Invalid PRD IDs sum: {total_joltage}. Time taken: {end_time - start_time}ns"
-        )
+        print(f"Mypyc Impl, total joltage: {total_joltage}. Time taken: {end_time - start_time}ns")
 
 
 def main(input_file: str) -> None:
