@@ -41,6 +41,7 @@
         "Plain Text": {
             "remove_trailing_whitespace_on_save": false,
             "ensure_final_newline_on_save": false,
+            "soft_wrap": "none",
         },
     },
 }

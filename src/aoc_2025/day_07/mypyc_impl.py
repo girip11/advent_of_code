@@ -1,4 +1,7 @@
-from collections import deque
+import bisect
+import itertools
+from collections import defaultdict, deque
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 from typing import Literal
 
@@ -13,9 +16,22 @@ class Node:
     pos: Position
     neighbors: "list[Node]" = field(default_factory=list)
 
+    def __hash__(self) -> int:
+        return hash(self.id_)
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Node):
+            return False
+
+        return self.id_ == other.id_
+
     @property
     def is_splitter(self) -> bool:
         return self.symbol == "^"
+
+    @property
+    def is_exit(self) -> bool:
+        return self.symbol == "E"
 
     @property
     def beam_split_positions(self) -> list[Position]:
@@ -46,15 +62,15 @@ def construct_splitter_graph(manifold: list[str]) -> Node:
     rows = len(manifold)
     cols = len(manifold[0])
 
-    node_id = 0
+    node_id: Iterator[int] = itertools.count(1)
     root = Node(
-        id_=node_id,
+        id_=next(node_id),
         symbol="S",
         pos=(0, next(idx for idx, v in enumerate(manifold[0]) if v == "S")),
     )
     nodes: deque[Node] = deque()
     nodes.append(root)
-    splitter_positions: dict[Position, Node] = {}
+    node_positions: dict[Position, Node] = {}
     visited_nodes: set[int] = {root.id_}
 
     while len(nodes) > 0:
@@ -68,12 +84,9 @@ def construct_splitter_graph(manifold: list[str]) -> Node:
                 if manifold[down_pos][split_beam[1]] == "^":
                     splitter_pos = (down_pos, split_beam[1])
 
-                    if splitter_pos in splitter_positions:
-                        neighbor = splitter_positions[splitter_pos]
-                    else:
-                        node_id += 1
-                        neighbor = Node(id_=node_id, symbol="^", pos=splitter_pos)
-                        splitter_positions[splitter_pos] = neighbor
+                    if (neighbor := node_positions.get(splitter_pos)) is None:
+                        neighbor = Node(id_=next(node_id), symbol="^", pos=splitter_pos)
+                        node_positions[splitter_pos] = neighbor
 
                     current_node.neighbors.append(neighbor)
                     if neighbor.id_ not in visited_nodes:
@@ -82,71 +95,38 @@ def construct_splitter_graph(manifold: list[str]) -> Node:
                     break
 
         if current_node.is_splitter:
-            if not current_node.has_left_neighbor and current_node.pos[1] - 1 >= 0:
-                node_id += 1
-                current_node.neighbors.append(
-                    Node(id_=node_id, symbol="E", pos=(rows - 1, current_node.pos[1] - 1))
-                )
-            if not current_node.has_right_neighbor and current_node.pos[1] + 1 < cols:
-                node_id += 1
-                current_node.neighbors.append(
-                    Node(id_=node_id, symbol="E", pos=(rows - 1, current_node.pos[1] + 1))
-                )
+            for n in ["L", "R"]:
+                neighbor_pos = None
+                if n == "L":
+                    if current_node.has_left_neighbor or current_node.pos[1] - 1 < 0:
+                        continue
+                    neighbor_pos = (rows - 1, current_node.pos[1] - 1)
+                else:
+                    if current_node.has_right_neighbor or current_node.pos[1] + 1 >= cols:
+                        continue
+                    neighbor_pos = (rows - 1, current_node.pos[1] + 1)
+
+                if neighbor_pos is not None:
+                    if (neighbor := node_positions.get(neighbor_pos)) is None:
+                        neighbor = Node(id_=next(node_id), symbol="E", pos=neighbor_pos)
+                        node_positions[neighbor_pos] = neighbor
+                    current_node.neighbors.append(neighbor)
 
     return root
-
-
-# part-1
-# def get_tachyon_beam_split_count(manifold: list[str]) -> int:
-#     split_count: int = 0
-#     rows = len(manifold)
-#     cols = len(manifold[0])
-#     start_pos: tuple[int, int] = (0, next(idx for idx, v in enumerate(manifold[0]) if v == "S"))
-#     beams: deque[tuple[int, int]] = deque()
-#     beams.append(start_pos)
-#     unique_beams: set[tuple[int, int]] = set()
-#     # multiple beams can reach the same splitter, but count once
-#     activated_splitters: set[tuple[int, int]] = set()
-
-#     while len(beams) > 0:
-#         current_beam = beams.popleft()
-
-#         for down_pos in range(current_beam[0] + 1, rows):
-#             if manifold[down_pos][current_beam[1]] == "^":
-#                 for new_beam in [(down_pos, current_beam[1] - 1), (down_pos, current_beam[1] + 1)]:
-#                     if 0 <= new_beam[1] < cols and new_beam not in unique_beams:
-#                         beams.append(new_beam)
-#                         unique_beams.add(new_beam)
-
-#                 splitter_pos = (down_pos, current_beam[1])
-#                 if splitter_pos not in activated_splitters:
-#                     activated_splitters.add(splitter_pos)
-#                     split_count += 1
-
-#                 print(
-#                     f"Beam: {current_beam}, Splitter: {(down_pos, current_beam[1])}, count: {split_count}"
-#                 )
-#                 break
-
-#     return split_count
 
 
 # part-1
 def get_tachyon_beam_split_count(root: Node) -> int:
     nodes: deque[Node] = deque()
     nodes.extend(root.neighbors)
-    visited: set[int] = set()
-    added: set[int] = set()
+
+    added: set[int] = {n.id_ for n in root.neighbors}
     split_count: int = 0
 
     while len(nodes) > 0:
         current_node = nodes.popleft()
-        # print(
-        #     f"{current_node.id_}, {current_node.symbol}, {current_node.pos}, {[n.pos for n in current_node.neighbors if n.is_splitter]}"
-        # )
 
-        if current_node.is_splitter and current_node.id_ not in visited:
-            visited.add(current_node.id_)
+        if current_node.is_splitter:
             split_count += 1
 
             for n in current_node.neighbors:
@@ -157,15 +137,34 @@ def get_tachyon_beam_split_count(root: Node) -> int:
     return split_count
 
 
-# part-2
 def get_tachyon_timelines(root: Node) -> int:
-    root_splitter = root.neighbors[0]
+    nodes: deque[Node] = deque()
+    nodes.extend(root.neighbors)
+    added: set[int] = {n.id_ for n in root.neighbors}
 
-    def get_downstream_timelines(node: Node) -> int:
-        # print(f"{node.id_},{node.pos}, {node.symbol}, {len(node.neighbors)}")
+    # Keep adding tachyon beams from upstream to downstream splitters
+    node_beams: dict[Node, int] = defaultdict(int)
+    node_beams[root.neighbors[0]] += 1
 
-        if node.symbol == "E":
-            return 1
-        return sum(get_downstream_timelines(n) for n in node.neighbors)
+    # maintains splitters that have connection to the exits
+    exit_nodes: dict[Node, set[Node]] = defaultdict(set)
 
-    return get_downstream_timelines(root_splitter)
+    while len(nodes) > 0:
+        current_node = nodes.popleft()
+
+        for neighbor in current_node.neighbors:
+            if neighbor.is_splitter:
+                node_beams[neighbor] += node_beams[current_node]
+                if neighbor.id_ not in added:
+                    # without sorting, incorrect counts get added.
+                    bisect.insort_left(nodes, neighbor, key=lambda e: e.pos)
+                    added.add(neighbor.id_)
+
+            if neighbor.is_exit:
+                exit_nodes[neighbor].add(current_node)
+
+    return sum(
+        node_beams[splitter]
+        for exit_node, splitters in exit_nodes.items()
+        for splitter in splitters
+    )
