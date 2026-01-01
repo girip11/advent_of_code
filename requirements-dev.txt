@@ -38,3 +38,5 @@ wheel==0.45.1
     # via
     #   adventofcode (pyproject.toml:dev)
     #   astunparse
+z3-solver==4.15.4.0
+    # via adventofcode (pyproject.toml)

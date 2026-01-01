@@ -30,3 +30,5 @@ typing-extensions==4.15.0
     # via mypy
 wheel==0.45.1
     # via astunparse
+z3-solver==4.15.4.0
+    # via adventofcode (pyproject.toml)
