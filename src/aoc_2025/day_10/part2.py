@@ -27,7 +27,7 @@ from aoc_2025.day_10.mypyc_impl import Machine
 # s.add(b2+b6 == 5)
 # s.add(b3+b4+b5 == 4)
 # s.add(b5+b6 == 3)
-# s.minimize(Sum(v))
+# s.minimize(Sum(v)) # minimize the total presses
 # s.check() == sat
 # s.model()
 def compute_fewest_joltage_button_presses(machines: list[Machine]) -> int:
