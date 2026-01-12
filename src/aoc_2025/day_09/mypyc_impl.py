@@ -42,8 +42,20 @@ def get_largest_rectangle_area_with_only_green_red_tiles(red_tiles_xy: list[Posi
                 max_idx = max(max_idx, c)
                 boundary_lookup[r] = (min_idx, max_idx)
 
-    return max(
-        get_area(p1, p2)
-        for p1, p2 in itertools.combinations(red_tiles_xy, 2)
-        if is_within_rg_tile_boundary((p1, p2), boundary_lookup)
+    # Take the first
+    pair = next(
+        filter(
+            lambda pair: is_within_rg_tile_boundary((pair[0], pair[1]), boundary_lookup),
+            sorted(
+                (
+                    (p1, p2)
+                    for p1, p2 in itertools.combinations(red_tiles_xy, 2)
+                    if not (p1[0] == p2[0] or p1[1] == p2[1])
+                ),
+                key=lambda pair: get_area(pair[0], pair[1]),
+                reverse=True,
+            ),
+        )
     )
+
+    return get_area(pair[0], pair[1])
